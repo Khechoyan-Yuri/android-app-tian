@@ -37,3 +37,5 @@ Ideas:
 +Ability to save tasks that you might want to repeat
 +Communication line between Requester and Accepter
 +Icons for tasks? (i.e. to give an idea of what type of task it is)
++Simple moneysign rating to give quick accessable idea of pricerange. 
++Order ideas by priority? (I'm sure we don't have enough time for all of this)
