@@ -28,3 +28,12 @@ Ideas:
 
 +Might not implement due to unnecessary difficulty and payment, but 'usage fee' 
 	small amount goes to us (the developers) for our service? (like a tax)
++Potential problem: People simply marking tasks 'incomplete' to avoid paying
++Potential problem:
++Tasks with pieces (i.e. 7 papers to deliver to different people, 
+	thus seven people could do it or could break it up to split the pay)
++Ability to request pay increase (But not force)-"This is too difficult for $5"
+	maybe other suggestions/commentary?
++Ability to save tasks that you might want to repeat
++Communication line between Requester and Accepter
++Icons for tasks? (i.e. to give an idea of what type of task it is)
