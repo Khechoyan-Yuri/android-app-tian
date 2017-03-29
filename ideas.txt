@@ -21,7 +21,8 @@ Ideas:
 +Have minimum transaction fee for every task ($5 min.?)  
 +Use Google Firebase to handle realtime updates = auto task re-fresh  
   ~back-end database - NEED TO RESEARCH ON HOW TO USE  
-+Have proprietary "Cha-ching" noise when task is completed (app notification sound)  
++Have proprietary "Cha-ching" noise when task is completed (app notification sound)
++Have a 'Star Rating' system to rate the student that issued the task & the dundie that completed the task
 
 *3/28/17 - Leah*
 
