@@ -22,3 +22,5 @@ Ideas:
 +Use Google Firebase to handle realtime updates = auto task re-fresh
   ~back-end database - NEED TO RESEARCH ON HOW TO USE
 +Have proprietary "Cha-ching" noise when task is completed (app notification sound)
++Might not implement due to unnecessary difficulty and payment, but 'usage fee' 
+	small amount goes to us (the developers) for our service? (like a tax)
