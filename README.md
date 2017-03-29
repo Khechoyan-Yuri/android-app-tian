@@ -18,10 +18,10 @@ You may use this code under the terms of the United States:
 *3/28/17 - Yuri*
 
 Ideas:
-+Have minimum transaction fee for every task ($5 min.?)
-+Use Google Firebase to handle realtime updates = auto task re-fresh
-  ~back-end database - NEED TO RESEARCH ON HOW TO USE
-+Have proprietary "Cha-ching" noise when task is completed (app notification sound)
++Have minimum transaction fee for every task ($5 min.?)  
++Use Google Firebase to handle realtime updates = auto task re-fresh  
+  ~back-end database - NEED TO RESEARCH ON HOW TO USE  
++Have proprietary "Cha-ching" noise when task is completed (app notification sound)  
 
 *3/28/17 - Leah*
 
