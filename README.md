@@ -24,5 +24,6 @@ Ideas:
 +Have proprietary "Cha-ching" noise when task is completed (app notification sound)
 
 *3/28/17 - Leah*
+
 +Might not implement due to unnecessary difficulty and payment, but 'usage fee' 
 	small amount goes to us (the developers) for our service? (like a tax)
