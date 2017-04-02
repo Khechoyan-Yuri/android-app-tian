@@ -39,3 +39,12 @@ Ideas:
 +Icons for tasks? (i.e. to give an idea of what type of task it is)
 +Simple moneysign rating to give quick accessable idea of pricerange. 
 +Order ideas by priority? (I'm sure we don't have enough time for all of this)
+
+
+*4/2/17 - Yuri*
+
+FROM LINE #29: Might not implement due to unnecessary difficulty and payment, but 'usage fee' 
+	small amount goes to us (the developers) for our service? (like a tax)
+	
+	+We as developers would be receiving a percentage of all transactions made. Maybe 30-40%? 
+	example: if transaction worth $5, we receive a profit of $1.5-$2 | if $15, we receive a profit of $4.5-$6
