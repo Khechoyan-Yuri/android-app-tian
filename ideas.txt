@@ -48,3 +48,6 @@ FROM LINE #29: Might not implement due to unnecessary difficulty and payment, bu
 	
 	+We as developers would be receiving a percentage of all transactions made. Maybe 30-40%? 
 	example: if transaction worth $5, we receive a profit of $1.5-$2 | if $15, we receive a profit of $4.5-$6
+
++Tabbed Main UI - we could create 2 tabs: the requester & the Dundie (task completer); then have everything else insde the quick menu/hamburger menu/etc.     See photo for example: https://goo.gl/8vF1Nb (FYI: the tabbed parts in the photos are the years)
++User would be able to navigate between being a requester & dundie by left/right swipe gestures
