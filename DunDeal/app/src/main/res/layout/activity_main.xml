@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.jessie.dundeal.MainActivity">
+
+        <TextView
+            android:id="@+id/task_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Tasks"
+            android:textSize="40dp"
+            android:textColor="#8ed2d9"/>
+
+        <LinearLayout
+            android:layout_below="@id/task_header"
+            android:id="@+id/task_layout"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#8ed2d9"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nothing Right Now"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Details"
+                    android:textSize="10dp"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Complete"
+                    android:textSize="15dp"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/request_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Requests"
+            android:textSize="40dp"
+            android:textColor="#8ed2d9"/>
+
+        <LinearLayout
+            android:layout_below="@id/request_header"
+            android:id="@+id/request_layout"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#8ed2d9"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nothing Right Now"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/request_btn1text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not Accepted"
+                    android:textSize="10dp"
+                    />
+
+                <Button
+                    android:id="@+id/request_btn2text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:textSize="15dp"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>
