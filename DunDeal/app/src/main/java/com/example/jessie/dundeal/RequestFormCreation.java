@@ -8,12 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Intent;
-
-
-
 import java.util.ArrayList;
-
-import static android.widget.Toast.LENGTH_LONG;
 
 
 
@@ -24,65 +19,83 @@ import static android.widget.Toast.LENGTH_LONG;
 public class RequestFormCreation extends AppCompatActivity {
 
 
-    //Creating Username variable
-    EditText Username;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.request_form_creation);
 
-        //Username, Name of task, Details, Location, Payment Amount
+        //UI Elements Needed: Username, Task Name, Details, Location, Payment Amount
+        //Buttons: Clear & Submit
 
-        //Buttons - Clear & Submit
 
+        /*
+            //Set Username object to array
+            Username = (EditText) findViewById(R.id.et_UserName);
+        */
 
-        //Set Username object to array
-        Username = (EditText) findViewById(R.id.et_UserName);
 
     }
 
-    //**********************************************************
-    //  Method for CLEARING FIELDS & Setting items to Default
-    //**********************************************************
+    //***************************************************************
+    //  Method for CANCELING REQUEST FORM & Going back to Main Menu
+    //**************************************************************
 
     public void CancelRequest(View v) {
+        //Initializes and extracts Values to store into a bundle
+        //for moving data to another activity
+        EditText UserName = (EditText) findViewById(R.id.et_UserName);
+        EditText TaskName = (EditText) findViewById(R.id.et_TaskName);
+        EditText TaskDetails = (EditText) findViewById(R.id.et_Details);
+        EditText TaskLocation = (EditText) findViewById(R.id.et_Location);
+        EditText TaskPayment = (EditText) findViewById(R.id.et_PaymentAmount);
+
+        //Clear EditText Fields (Convenience Protocol)
+        UserName.setText("");
+        TaskName.setText("");
+        TaskDetails.setText("");
+        TaskLocation.setText("");
+        TaskPayment.setText("");
+
+        //Direct App back to Main Menu
         setContentView(R.layout.activity_main);
 
-        Toast.makeText(this, "Request Canceled", LENGTH_LONG).show();
+        //Throw toast verifying of cancellation request
+        Toast.makeText(this, "Request Canceled", Toast.LENGTH_SHORT).show();
     }
 
-    //***********************************************************************
-    //Checking Validity of User Input (Emails & Passwords after submission)
-    //***********************************************************************
+    //***********************************************************************************
+    //Checking Validity of User Input (Username, Task name, Details, Location, Payment)
+    //***********************************************************************************
 
-    public void Submit(View v) {
+    public void Submit(View v1) {
+
+        //**************************************
+        //EditText Fields Verification - START
+        //**************************************
 
         //Initializes and extracts Values to store into a bundle
         //for moving data to another activity
-        EditText FirstName = (EditText) findViewById(R.id.et_FirstName);
-        EditText LastName = (EditText) findViewById(R.id.et_LastName);
-        EditText PhoneNumber = (EditText) findViewById(R.id.et_PhoneNumber);
-        EditText Email = (EditText) findViewById(R.id.et_EnterEmail);
-        EditText ReEmail = (EditText) findViewById(R.id.et_ReEnterEmail);
         EditText UserName = (EditText) findViewById(R.id.et_UserName);
-        EditText Password = (EditText) findViewById(R.id.et_PassWord);
-        EditText RePassword = (EditText) findViewById(R.id.et_ReEnterPassWord);
+        EditText TaskName = (EditText) findViewById(R.id.et_TaskName);
+        EditText TaskDetails = (EditText) findViewById(R.id.et_Details);
+        EditText TaskLocation = (EditText) findViewById(R.id.et_Location);
+        EditText TaskPayment = (EditText) findViewById(R.id.et_PaymentAmount);
 
-        //Receiving Text input from user, converting toString()
-        String verify_username = Username.getText().toString();
+
+        //Receive Text input from user, converting toString()
+        String verify_username = UserName.getText().toString();
+        String verify_taskName = TaskName.getText().toString();
+        String verify_taskDetails = TaskDetails.getText().toString();
+        String verify_taskLocation = TaskLocation.getText().toString();
+        String verify_taskPayment = TaskPayment.getText().toString();
 
         //These booleans will be used to help identify if application
         //can move onto the 2nd Activity
-        boolean FNE_confirm_submission;
-        boolean LNE_confirm_submission;
-        boolean PHE_confirm_submission;
-        boolean E_confirm_submission;
-        boolean EV_confirm_submission;
-        boolean P_confirm_submission;
-        boolean PV_confirm_submission;
-        boolean U_confirm_submission;
+        boolean UN_confirm_submission;
+        boolean TN_confirm_submission;
+        boolean TD_confirm_submission;
+        boolean TL_confirm_submission;
+        boolean TP_confirm_submission;
 
         //Container for an array of values - (i.e. already submitted UserNames) [strings.xml]
         //this will retrieve already used UserNames
@@ -96,81 +109,61 @@ public class RequestFormCreation extends AppCompatActivity {
             name_Username.add(convertArray.getString(i));
         }
 
-        //Verifying if First Name is empty or not | FNE = First Name Entry
-        if(FirstName.getText().toString().equals("")){
-            Toast.makeText(this, "First Name were not Entered", Toast.LENGTH_SHORT).show();
-            FNE_confirm_submission = false;
+        //Verifying if Username is empty or not | UN = Username Entry
+        if(verify_username.equals("")){
+            Toast.makeText(this, "Username was not Entered", Toast.LENGTH_SHORT).show();
+            UN_confirm_submission = false;
         }
         else{
-            FNE_confirm_submission = true;
+            UN_confirm_submission = true;
         }
 
-        //Verifying if Last Name is empty or not | LNE = Last Name Entry
-        if(LastName.getText().toString().equals("")){
-
-            Toast.makeText(this, "Last Name were not Entered", Toast.LENGTH_SHORT).show();
-
-            LNE_confirm_submission = false;
+        //Verifying if Task Name is empty or not | TN = Task Name Entry
+        if(verify_taskName.equals("")){
+            Toast.makeText(this, "Task Name was not Entered", Toast.LENGTH_SHORT).show();
+            TN_confirm_submission = false;
         }
         else{
-            LNE_confirm_submission = true;
+            TN_confirm_submission = true;
         }
 
-        //Verifying if Phone Number is empty or not | PNE = Phone Number Entry
-        if(PhoneNumber.getText().toString().equals("")){
-            Toast.makeText(this, "Phone Number were not Entered", Toast.LENGTH_SHORT).show();
-            PHE_confirm_submission = false;
-        }
-        else{
-            PHE_confirm_submission = true;
-        }
-
-        //Verifying if Email & ReEmail are empty or not | E = Email Entry
-        if(email_verify1.getText().toString().equals("") || email_verify2.getText().toString().equals("") ){
-
-            Toast.makeText(this, "Emails were not Entered", Toast.LENGTH_SHORT).show();
-
-            E_confirm_submission = false;
+        //Verifying if Task Details is empty or not | TD = Task Details Entry
+        if(verify_taskDetails.equals("")){
+            Toast.makeText(this, "Task Details were not Entered", Toast.LENGTH_SHORT).show();
+            TD_confirm_submission = false;
         }
         else{
-            E_confirm_submission = true;
+            TD_confirm_submission = true;
         }
-        //Verifying if Passwords Match | EV = Email Verification
-        if(!email_verify2.getText().toString().trim().equals(email_verify1.getText().toString().trim())){
 
-            EV_confirm_submission = false;
-
-            Email.setText("");
-            ReEmail.setText("");
-
-            Toast.makeText(this, "Emails Do Not Match", Toast.LENGTH_SHORT).show();
+        //Verifying if Task Location was empty or not | TL = Task Location Entry
+        if(verify_taskLocation.equals("")){
+            Toast.makeText(this, "Task Location was not Entered", Toast.LENGTH_SHORT).show();
+            TL_confirm_submission = false;
         }
         else{
-            EV_confirm_submission = true;
+            TL_confirm_submission = true;
         }
 
-        //Verifying if Passwords Match | P = Password Match
-        if(!password_verify2.getText().toString().trim().equals(password_verify1.getText().toString().trim())){
-            Password.setText("");
-            RePassword.setText("");
-            Toast.makeText(this, "Passwords Do Not Match", Toast.LENGTH_LONG).show();
-
-            P_confirm_submission = false;
+        //Verifying if Task Payment was empty or not | TP = Task Payment Entry
+        if(verify_taskPayment.equals("")){
+            Toast.makeText(this, "Task Payment was not Entered", Toast.LENGTH_SHORT).show();
+            TP_confirm_submission = false;
         }
         else{
-            P_confirm_submission = true;
+            TP_confirm_submission = true;
         }
 
-        //Verifying if Passwords are empty or not | PV = Password Verification
-        if(password_verify1.getText().toString().equals("") || password_verify2.getText().toString().equals("")){
+        //**************************************
+        //EditText Fields Verification - STOP
+        //**************************************
 
-            Toast.makeText(this, "Passwords were not Entered", Toast.LENGTH_SHORT).show();
 
-            PV_confirm_submission = false;
-        }
-        else{
-            PV_confirm_submission = true;
-        }
+
+        //************************************************
+        // BUNDLE LOGIC - ---Needs Modification---
+        //************************************************
+
 
         //Verifying that Username DOES NOT exist in database (string.xml file)
         //If username already exists, clear field & ask user to register a different username
@@ -188,9 +181,8 @@ public class RequestFormCreation extends AppCompatActivity {
         }
 
         //Create OVERALL Verification Boolean
-        boolean final_confirm_submission = FNE_confirm_submission && LNE_confirm_submission &&
-                PHE_confirm_submission && E_confirm_submission && EV_confirm_submission &&
-                P_confirm_submission && PV_confirm_submission && U_confirm_submission;
+        boolean final_confirm_submission = UN_confirm_submission && TN_confirm_submission &&
+                TD_confirm_submission && TL_confirm_submission && TP_confirm_submission;
 
         if(final_confirm_submission == false){
         }

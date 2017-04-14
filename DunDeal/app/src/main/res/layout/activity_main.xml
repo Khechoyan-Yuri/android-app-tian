@@ -39,12 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Details"
-<<<<<<< HEAD
             android:textSize="10dp"/>
-=======
-            android:textSize="15dp"
-            />
->>>>>>> 96efaa0ec6af0e5f029f0cf4bb699066b43a9a25
+
 
         <Button
             android:id="@+id/task_btn2"
@@ -93,13 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Not Accepted"
-<<<<<<< HEAD
             android:textSize="10dp" />
-=======
-            android:textSize="15dp"
-            />
->>>>>>> 96efaa0ec6af0e5f029f0cf4bb699066b43a9a25
-
         <Button
             android:id="@+id/request_btn2text"
             android:layout_below="@id/subtitle2"
