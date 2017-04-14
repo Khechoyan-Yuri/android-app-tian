@@ -1,144 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jessie.dundeal.MainActivity">
+
+    <TextView
+        android:id="@+id/task_header"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Tasks"
+        android:textSize="40dp"
+        android:textColor="#8ed2d9"/>
+
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.jessie.dundeal.MainActivity">
+        android:layout_below="@id/task_header"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/task_layout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#8ed2d9"
+        >
 
         <TextView
-            android:id="@+id/task_header"
+            android:id="@+id/subtitle1"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Tasks"
-            android:textSize="40dp"
-            android:textColor="#8ed2d9"
-            android:layout_centerHorizontal="true"/>
-
-        <RelativeLayout
-            android:layout_below="@id/task_header"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/task_layout"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-<<<<<<< HEAD
-            android:background="#8ed2d9">
-=======
-            android:background="#8ed2d9"
-            >
->>>>>>> 36ae248ccdc7222f58b03a1e414071afdf4f7331
-
-            <TextView
-                android:id="@+id/subtitle1"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nothing Right Now"/>
-
-<<<<<<< HEAD
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-=======
->>>>>>> 36ae248ccdc7222f58b03a1e414071afdf4f7331
-
-                <Button
-                    android:id="@+id/task_btn1"
-                    android:layout_below="@id/subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Details"
-                    android:textSize="10dp"/>
-
-                <Button
-                    android:id="@+id/task_btn2"
-                    android:layout_below="@id/subtitle1"
-                    android:layout_toRightOf="@id/task_btn1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Complete"
-                    android:textSize="15dp"/>
-<<<<<<< HEAD
-            </RelativeLayout>
-        </RelativeLayout>
-=======
+            android:text="Nothing Right Now"/>
 
 
-        </RelativeLayout>
-
->>>>>>> 36ae248ccdc7222f58b03a1e414071afdf4f7331
-
-        <TextView
-            android:id="@+id/request_header"
-            android:layout_centerHorizontal="true"
-            android:layout_alignBottom="@+id/"
+        <Button
+            android:id="@+id/task_btn1"
+            android:layout_below="@id/subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="200dp"
-            android:layout_below="@id/task_layout"
-            android:text="Your Requests"
-            android:textSize="40dp"
-            android:textColor="#8ed2d9"/>
+            android:text="Details"
+            android:textSize="10dp"
+            />
 
-        <RelativeLayout
-            android:layout_below="@id/request_header"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/request_layout"
-            android:layout_width="200dp"
+        <Button
+            android:id="@+id/task_btn2"
+            android:layout_below="@id/subtitle1"
+            android:layout_toRightOf="@id/task_btn1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-<<<<<<< HEAD
-            android:background="#8ed2d9">
-=======
-            android:background="#8ed2d9"
-            >
-
->>>>>>> 36ae248ccdc7222f58b03a1e414071afdf4f7331
-            <TextView
-                android:id="@+id/subtitle2"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nothing Right Now"/>
-<<<<<<< HEAD
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-=======
-
->>>>>>> 36ae248ccdc7222f58b03a1e414071afdf4f7331
-
-                <Button
-                    android:id="@+id/request_btn1text"
-                    android:layout_below="@id/subtitle2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Not Accepted"
-                    android:textSize="10dp" />
-
-                <Button
-                    android:id="@+id/request_btn2text"
-                    android:layout_below="@id/subtitle2"
-                    android:layout_toRightOf="@id/request_btn1text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edit"
-                    android:textSize="15dp"/>
-<<<<<<< HEAD
-            </RelativeLayout>
-        </RelativeLayout>
-    </RelativeLayout>
-</ScrollView>
-=======
-
-        </RelativeLayout>
+            android:text="Complete"
+            android:textSize="15dp"/>
 
 
     </RelativeLayout>
->>>>>>> 36ae248ccdc7222f58b03a1e414071afdf4f7331
+
+
+    <TextView
+        android:id="@+id/request_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:layout_below="@id/task_layout"
+        android:text="Your Requests"
+        android:textSize="40dp"
+        android:textColor="#8ed2d9"/>
+
+    <RelativeLayout
+        android:layout_below="@id/request_header"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/request_layout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#8ed2d9"
+        >
+
+        <TextView
+            android:id="@+id/subtitle2"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nothing Right Now"/>
+
+
+        <Button
+            android:id="@+id/request_btn1text"
+            android:layout_below="@id/subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not Accepted"
+            android:textSize="10dp"
+            />
+
+        <Button
+            android:id="@+id/request_btn2text"
+            android:layout_below="@id/subtitle2"
+            android:layout_toRightOf="@id/request_btn1text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textSize="15dp"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
