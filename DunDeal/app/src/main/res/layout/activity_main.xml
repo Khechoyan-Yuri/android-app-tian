@@ -23,8 +23,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#8ed2d9"
-        >
+        android:background="#8ed2d9">
 
         <TextView
             android:id="@+id/subtitle1"
@@ -40,8 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Details"
-            android:textSize="10dp"
-            />
+            android:textSize="10dp"/>
 
         <Button
             android:id="@+id/task_btn2"
@@ -68,14 +66,13 @@
         android:textColor="#8ed2d9"/>
 
     <RelativeLayout
+        android:id="@+id/request_layout"
         android:layout_below="@id/request_header"
         android:layout_centerHorizontal="true"
-        android:id="@+id/request_layout"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#8ed2d9"
-        >
+        android:background="#8ed2d9">
 
         <TextView
             android:id="@+id/subtitle2"
@@ -91,8 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Not Accepted"
-            android:textSize="10dp"
-            />
+            android:textSize="10dp" />
 
         <Button
             android:id="@+id/request_btn2text"
@@ -105,5 +101,15 @@
 
     </RelativeLayout>
 
+        <Button
+            android:id="@+id/btn_make_request"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Make Request"
+            android:layout_below="@+id/request_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textSize="15dp"
+            android:onClick="RequestForm"/>
 
 </RelativeLayout>
