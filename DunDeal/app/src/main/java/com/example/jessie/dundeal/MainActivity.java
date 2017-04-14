@@ -6,7 +6,7 @@ import android.util.TypedValue;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class  MainActivity extends AppCompatActivity {
 
     TextView view;
 
@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_main);
 
     }
 

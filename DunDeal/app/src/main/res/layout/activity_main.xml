@@ -16,21 +16,23 @@
             android:layout_height="wrap_content"
             android:text="Your Tasks"
             android:textSize="40dp"
-            android:textColor="#8ed2d9"/>
+            android:textColor="#8ed2d9"
+            android:layout_centerHorizontal="true"/>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_below="@id/task_header"
             android:id="@+id/task_layout"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#8ed2d9"
-            >
+            android:background="#8ed2d9">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nothing Right Now"/>
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -39,41 +41,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Details"
-                    android:textSize="10dp"
-                    />
+                    android:textSize="10dp"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Complete"
                     android:textSize="15dp"/>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/request_header"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your Requests"
             android:textSize="40dp"
             android:textColor="#8ed2d9"/>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_below="@id/request_header"
             android:id="@+id/request_layout"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#8ed2d9"
-            >
+            android:background="#8ed2d9">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nothing Right Now"/>
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -83,8 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Not Accepted"
-                    android:textSize="10dp"
-                    />
+                    android:textSize="10dp" />
 
                 <Button
                     android:id="@+id/request_btn2text"
@@ -92,11 +90,7 @@
                     android:layout_height="wrap_content"
                     android:text="Edit"
                     android:textSize="15dp"/>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
+            </RelativeLayout>
+        </RelativeLayout>
     </RelativeLayout>
 </ScrollView>
