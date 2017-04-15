@@ -39,7 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Details"
-            android:textSize="10dp"/>
+            android:textSize="10dp"
+            android:onClick="DetailsLook"/>
 
 
         <Button
@@ -53,6 +54,18 @@
 
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_search_tasks"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Search for Tasks"
+        android:layout_below="@+id/task_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="15dp"
+        android:onClick="SearchTasks"/>
+
 
 
     <TextView

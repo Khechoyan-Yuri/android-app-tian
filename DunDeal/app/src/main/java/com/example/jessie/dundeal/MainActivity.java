@@ -1,5 +1,6 @@
 package com.example.jessie.dundeal;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -33,7 +34,15 @@ public class  MainActivity extends AppCompatActivity {
     }
 
     public void RequestForm(View v){
-        setContentView(R.layout.request_form_creation);
+        Intent i = new Intent(getApplicationContext(), RequestFormCreation.class);
 
+        startActivity(i);
+
+    }
+
+    public void DetailsLook(View v) {
+        Intent i = new Intent(getApplicationContext(), DetailsForm.class);
+
+        startActivity(i);
     }
 }

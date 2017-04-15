@@ -58,8 +58,10 @@ public class RequestFormCreation extends AppCompatActivity {
         TaskLocation.setText("");
         TaskPayment.setText("");
 
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
         //Direct App back to Main Menu
-        setContentView(R.layout.activity_main);
+        startActivity(intent);
 
         //Throw toast verifying of cancellation request
         Toast.makeText(this, "Request Canceled", Toast.LENGTH_SHORT).show();
@@ -206,7 +208,7 @@ public class RequestFormCreation extends AppCompatActivity {
             //Securely Store items into bundle
             intent.putExtras(bundle);
             //Start the Activity
-            setContentView(R.layout.activity_main);
+            startActivity(intent);
         }
     }
 }
