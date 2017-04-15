@@ -14,10 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <!-- USERNAME TextView & EditText -->
+    <!-- USERNAME TextViews -->
     <TextView
         android:id="@+id/tv_UserName"
-        android:text="Username:"
+        android:text="Username: "
         android:textSize="24dp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
         android:ems="10"
         android:textSize="20dp"/>
 
-    <!--  Task Name TextView & EditText -->
+    <!--  Task Name TextViews-->
     <TextView
         android:id="@+id/tv_TaskName"
         android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tv_UserName"
         android:layout_marginTop="30dp"
-        android:text="Task Name:"
+        android:text="Task Name: "
         android:textSize="24dp" />
 
     <TextView
@@ -57,10 +57,10 @@
         android:ems="10"
         android:textSize="20dp"/>
 
-    <!--  Details TextView & EditText -->
+    <!--  Details TextViews -->
     <TextView
         android:id="@+id/tv_Details"
-        android:text="Task Details:"
+        android:text="Task Details: "
         android:textSize="24dp"
         android:layout_marginTop="46dp"
         android:layout_width="wrap_content"
@@ -80,10 +80,10 @@
         android:layout_toRightOf="@+id/tv_Details"
         android:layout_toEndOf="@+id/tv_Details" />
 
-    <!--  Location TextView & EditText -->
+    <!--  Location TextViews -->
     <TextView
         android:id="@+id/tv_Location"
-        android:text="Task Location:"
+        android:text="Task Location: "
         android:textSize="24dp"
         android:layout_marginTop="68dp"
         android:layout_width="wrap_content"
@@ -103,10 +103,10 @@
         android:layout_toRightOf="@+id/tv_Location"
         android:layout_toEndOf="@+id/tv_Location" />
 
-    <!--  Payment Amount TextView & EditText -->
+    <!--  Payment Amount TextViews -->
     <TextView
         android:id="@+id/tv_PaymentAmount"
-        android:text="Payment Amount:"
+        android:text="Payment Amount: "
         android:textSize="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
