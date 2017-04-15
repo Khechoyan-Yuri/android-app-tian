@@ -25,10 +25,10 @@ public class  MainActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         if(bundle != null) {
-            requestHeader = (TextView) findViewById(R.id.request_header);
-
+            //requestHeader = (TextView) findViewById(R.id.request_header);
+            requestHeader = (TextView) findViewById(R.id.subtitle2);
             requestHeader.setText(bundle.getString("taskname"));
-            requestHeader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
+            //requestHeader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
         }
 
     }
