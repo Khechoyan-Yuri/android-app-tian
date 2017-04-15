@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DunDeal</string>
+    <array name="username_array">
+
+
+    </array>
 </resources>

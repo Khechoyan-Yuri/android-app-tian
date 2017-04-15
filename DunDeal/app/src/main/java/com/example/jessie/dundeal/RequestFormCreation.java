@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 public class RequestFormCreation extends AppCompatActivity {
 
+    boolean U_confirm_submission;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,20 +194,19 @@ public class RequestFormCreation extends AppCompatActivity {
             //If all matching fields match (emails, passwords - when submit button is pressed)
             //onClick() method is called
             //Initializes Intent and bundle for moving data from one activity to another
-            Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             Bundle bundle = new Bundle();
 
             //Adding items to the bundle - output to user for SecondActivity (confirmation)
-            bundle.putString("fname", FirstName.getText().toString());
-            bundle.putString("lname", LastName.getText().toString());
-            bundle.putString("phnumber", PhoneNumber.getText().toString());
-            bundle.putString("email", Email.getText().toString());
+            bundle.putString("taskname", TaskName.getText().toString());
+            bundle.putString("tasklocation",TaskLocation.getText().toString());
             bundle.putString("username", UserName.getText().toString());
+
 
             //Securely Store items into bundle
             intent.putExtras(bundle);
             //Start the Activity
-            startActivity(intent);
+            setContentView(R.layout.activity_main);
         }
     }
 }

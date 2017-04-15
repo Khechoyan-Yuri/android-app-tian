@@ -9,19 +9,26 @@ import android.widget.TextView;
 
 public class  MainActivity extends AppCompatActivity {
 
-    TextView view;
+    TextView requestHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        CreateText();
 
     }
 
-    public void CreateNewText() {
-        view.setText("Get me a coffee");
-        view.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
+    public void CreateText() {
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null) {
+            requestHeader = (TextView) findViewById(R.id.request_header);
+
+            requestHeader.setText(bundle.getString("taskname"));
+            requestHeader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
+        }
 
     }
 
