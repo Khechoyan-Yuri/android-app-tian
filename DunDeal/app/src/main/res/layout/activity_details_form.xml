@@ -32,7 +32,6 @@
         android:layout_toEndOf="@+id/tv_UserName"
         android:layout_toRightOf="@+id/tv_UserName"
         android:ems="10"
-        android:inputType="textPersonName"
         android:textSize="20dp"/>
 
     <!--  Task Name TextView & EditText -->
@@ -56,7 +55,6 @@
         android:layout_toEndOf="@+id/tv_TaskName"
         android:layout_toRightOf="@+id/tv_TaskName"
         android:ems="10"
-        android:inputType="textPersonName"
         android:textSize="20dp"/>
 
     <!--  Details TextView & EditText -->
@@ -76,7 +74,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:textSize="20dp"
         android:layout_alignBaseline="@+id/tv_Details"
         android:layout_alignBottom="@+id/tv_Details"
@@ -100,7 +97,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:textSize="20dp"
         android:layout_alignBaseline="@+id/tv_Location"
         android:layout_alignBottom="@+id/tv_Location"
@@ -119,14 +115,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-
-    <!-- CANCEL BUTTON -->
     <TextView
         android:id="@+id/PaymentAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:textSize="20dp"
         android:layout_alignBaseline="@+id/tv_PaymentAmount"
         android:layout_alignBottom="@+id/tv_PaymentAmount"
@@ -134,7 +127,9 @@
         android:layout_alignParentEnd="true"
         android:layout_toRightOf="@+id/tv_PaymentAmount"
         android:layout_toEndOf="@+id/tv_PaymentAmount" />
-
+        
+        
+    <!-- CANCEL BUTTON -->
     <Button
         android:id="@+id/BackButton"
         android:onClick="GoBack"
