@@ -1,8 +1,10 @@
 package com.example.jessie.dundeal;
 
 //Import Statements
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +21,9 @@ import java.util.ArrayList;
 public class RequestFormCreation extends AppCompatActivity {
 
     boolean U_confirm_submission;
+
+    SharedPreferences tracker;
+
 
 
     @Override
@@ -199,11 +204,20 @@ public class RequestFormCreation extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             Bundle bundle = new Bundle();
 
-            //Adding items to the bundle - output to user for SecondActivity (confirmation)
-            bundle.putString("taskname", TaskName.getText().toString());
-            bundle.putString("tasklocation",TaskLocation.getText().toString());
-            bundle.putString("username", UserName.getText().toString());
+            tracker = PreferenceManager.getDefaultSharedPreferences(this);
 
+            int i = tracker.getInt("bundleNumber", 0);
+
+            //Adding items to the bundle - output to user for SecondActivity (confirmation)
+            bundle.putString("taskname"+i, TaskName.getText().toString());
+            bundle.putString("tasklocation"+i,TaskLocation.getText().toString());
+            bundle.putString("details"+i, TaskDetails.getText().toString());
+            bundle.putString("payment"+i, TaskPayment.getText().toString());
+            bundle.putString("username"+i, UserName.getText().toString());
+
+            SharedPreferences.Editor editor = tracker.edit();
+
+            editor.putInt("requestTracker", i);
 
             //Securely Store items into bundle
             intent.putExtras(bundle);

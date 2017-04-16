@@ -45,4 +45,10 @@ public class  MainActivity extends AppCompatActivity {
 
         startActivity(i);
     }
+
+    public void EditRequest(View v) {
+        Intent i = new Intent(getApplicationContext(), RequestFormCreation.class);
+
+        startActivity(i);
+    }
 }

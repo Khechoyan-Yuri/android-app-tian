@@ -19,15 +19,31 @@ public class DetailsForm extends AppCompatActivity {
         TextView location = (TextView) findViewById(R.id.Location);
         TextView paymentamount = (TextView) findViewById(R.id.PaymentAmount);
 
+        Intent intent = getIntent();
 
-        username.setText("John Doe");
+        if(intent.hasExtra("username"+0)) {
+            taskname.setText(intent.getStringExtra("username"+0));
+        }
+        username.setText("Coffee");
 
-        taskname.setText("Get me some coffee");
+        if(intent.hasExtra("taskname"+0)) {
+           details.setText(intent.getStringExtra("taskname"+0));
+        }
+        details.setText("Get me some coffee");
 
+        if(intent.hasExtra("details"+0)){
+            details.setText(intent.getStringExtra("details"+0));
+        }
         details.setText("Black, from Starbucks");
 
+        if(intent.hasExtra("tasklocation"+0)) {
+            location.setText(intent.getStringExtra("location"+0));
+        }
         location.setText("Fontbonne University");
 
+        if(intent.hasExtra("payment"+0)) {
+            paymentamount.setText(intent.getStringExtra("payment"+0));
+        }
         paymentamount.setText("$25");
     }
 
