@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".RequestFormCreation" />
         <activity android:name=".DetailsForm"></activity>
+        <activity android:name=".SearchTasks"></activity>
     </application>
 
 </manifest>
