@@ -159,6 +159,10 @@ public class RequestFormCreation extends AppCompatActivity {
             Toast.makeText(this, "Task Payment was not Entered", Toast.LENGTH_SHORT).show();
             TP_confirm_submission = false;
         }
+        else if (Float.parseFloat(verify_taskPayment) < 5){
+            Toast.makeText(this, "Minimum payment is $5", Toast.LENGTH_SHORT).show();
+            TP_confirm_submission = false;
+        }
         else{
             TP_confirm_submission = true;
         }
