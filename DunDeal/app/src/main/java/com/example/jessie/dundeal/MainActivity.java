@@ -31,7 +31,7 @@ public class  MainActivity extends AppCompatActivity {
             LinearLayout tasks = (LinearLayout) findViewById(R.id.LL_tasks);
             //for (int i = 0; i < options.length; i++) { //for each of the items in the database
             inflater = getLayoutInflater();
-            convertView = inflater.inflate(R.layout.box, null);
+            convertView = inflater.inflate(R.layout.main_task_box, null);
             tasks.addView(convertView);
 
             //must use convertView.findViewById to fetch dynamically, or else all edits apply to one item
@@ -48,7 +48,7 @@ public class  MainActivity extends AppCompatActivity {
         LinearLayout requests = (LinearLayout) findViewById(R.id.LL_requests);
         //for (int i = 0; i < options.length; i++) { //for each of the items in the database
             inflater = getLayoutInflater();
-            convertView = inflater.inflate(R.layout.box, null);
+            convertView = inflater.inflate(R.layout.main_request_box, null);
             requests.addView(convertView);
 
             //must use convertView.findViewById to fetch dynamically, or else all edits apply to one item
