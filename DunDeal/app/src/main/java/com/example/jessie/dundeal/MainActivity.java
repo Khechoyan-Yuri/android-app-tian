@@ -1,5 +1,71 @@
 package com.example.jessie.dundeal;
 
+//##########################################################################
+/*	PROGRAM TITLE: DunDeal
+    AUTHORS: Yuri Khechoyan, Jessie Wilkins, Leah Perry
+    COURSE NUMBER: CIS 472
+    COURSE SECTION NUMBER: 01
+    INSTRUCTOR NAME: Dr. Tian
+    PROJECT NAME: TEAM PROJECT #1 (Final)
+    PRODUCTION NUMBER: DD-TP-1F
+    DUE DATE: 04/20/2017
+//##########################################################################
+
+SUMMARY
+
+    This program is designed to be a Service-based application.
+    Application is similar to the Uber platform.
+    When app is launched, user will be able to log in to their respective account (future implementation)
+    When inside of the account, the end user has the ability to create tasks that
+    would be completed by other users (called Dundies).
+    The end-user that creates tasks, has the ability to:
+
+        -Set a title for the task
+        -Provide details (if title is not self-explanatory)
+        -Set location where the task(s) need to take place (University campus)*
+        -Set the payment amount for this task that needs to be completed.**
+
+
+							------WHEN TASK IS SUBMITTED-----
+
+    The Dundie(s) have the ability to either accept or decline the tasks that are posted
+    App will also let the end-user know who is currently handling the task (if task is accepted) (future implementation)
+
+
+        *  This app will mainly be used by University students. Therefore, typical location
+           for tasks would be the University at which the student resides/attends. (line 25)
+
+        ** The minimum required payment is $5. The end-user that is creating the task can
+           set a higher payment amount (based on task difficulty & end-user's discretion).
+           Tips may also be applied (if the end-user so chooses) (line 26) (future implementation?)
+
+
+//##########################################################################
+
+INPUT
+
+        -Task Name
+        -Task Details (if needed)
+        -Task Location (Required)
+        -Payment Amount for Task (minimum = $5; Tips are optional)
+
+//##########################################################################
+
+OUTPUT
+
+    Application will post newly created tasks to the overall Task board (based on GPS location & radius)
+    When Task is completed, it is removed
+
+//##########################################################################
+
+ASSUMPTIONS
+
+- App has to have a stable WiFi or Cellular Connection (3G/4G/LTE, etc.)
+- End-user has the ability to fill out the EditText fields properly
+- The dundie has the ability to carry out & complete the tasks that they accept
+*/
+//##########################################################################
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
