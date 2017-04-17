@@ -29,7 +29,7 @@ public class SearchTasks extends AppCompatActivity {
         convertView = inflater.inflate(R.layout.box, null);
         activity_search_tasks.addView(convertView);
 
-        TextView txt = (TextView) findViewById(R.id.box_subtitle1);
+        TextView txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
         txt.setText("Example changed title");//example of changin title as we would when fetching from database
         //We would also place an onclick method here for the buttons, which would take us to appropriate details
         //and add the task to accepted tasks
