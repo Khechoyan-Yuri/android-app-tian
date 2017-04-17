@@ -15,10 +15,27 @@
         android:text="Your Tasks"
         android:textSize="40dp"
         android:textColor="#8ed2d9"/>
+    
+    <ScrollView
+        android:id="@+id/task_scroll"
+        android:layout_below="@id/task_header"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--This linear layout holds all of the tasks taken, so we can add them dynamically-->
+            <LinearLayout
+                android:id="@+id/LL_tasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_below="@id/task_header"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:id="@+id/task_layout"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -54,35 +71,53 @@
 
 
     </RelativeLayout>
+                
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_search_tasks"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Search for Tasks"
-        android:layout_below="@+id/task_layout"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:textSize="15dp"
         android:onClick="SearchTasks"/>
 
-
+    </LinearLayout>
+    </ScrollView>
 
     <TextView
         android:id="@+id/request_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:layout_below="@id/task_layout"
+        android:layout_below="@id/task_scroll"
         android:text="Your Requests"
         android:textSize="40dp"
         android:textColor="#8ed2d9"/>
+    
+    <ScrollView
+        android:id="@+id/request_scroll"
+        android:layout_below="@id/request_header"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <!--This linear layout holds all of the requests, so we can add them dynamically-->
+        <LinearLayout
+            android:id="@+id/LL_requests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/request_layout"
-        android:layout_below="@id/request_header"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -113,16 +148,21 @@
             android:textSize="15dp"/>
 
     </RelativeLayout>
+            
+    </LinearLayout>
 
         <Button
             android:id="@+id/btn_make_request"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Make Request"
-            android:layout_below="@+id/request_layout"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:textSize="15dp"
             android:onClick="RequestForm"/>
+            
+    </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
