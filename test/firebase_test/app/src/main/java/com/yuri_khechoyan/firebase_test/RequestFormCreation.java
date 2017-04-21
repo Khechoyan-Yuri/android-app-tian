@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 //***************
@@ -21,6 +24,8 @@ public class RequestFormCreation extends AppCompatActivity {
     boolean U_confirm_submission;
 
     SharedPreferences tracker;
+
+    DatabaseReference myRef;
 
 
 
@@ -216,6 +221,15 @@ public class RequestFormCreation extends AppCompatActivity {
             bundle.putString("details"+i, TaskDetails.getText().toString());
             bundle.putString("payment"+i, TaskPayment.getText().toString());
             bundle.putString("username"+i, UserName.getText().toString());
+
+            //Initializes database reference to database "message"
+            myRef = FirebaseDatabase.getInstance().getReference("message");
+
+            myRef.child("User").child("username"+i).setValue(UserName.getText().toString());
+            myRef.child("TaskName").child("taskname"+i).setValue(TaskName.getText().toString());
+            myRef.child("TaskLocation").child("tasklocation"+i).setValue(TaskLocation.getText().toString());
+            myRef.child("Details").child("details"+i).setValue(TaskDetails.getText().toString());
+            myRef.child("Payment").child("payment"+i).setValue(TaskPayment.getText().toString());
 
             SharedPreferences.Editor editor = tracker.edit();
 
