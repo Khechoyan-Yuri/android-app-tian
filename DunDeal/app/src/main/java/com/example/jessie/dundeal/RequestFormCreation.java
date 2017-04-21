@@ -210,7 +210,7 @@ public class RequestFormCreation extends AppCompatActivity {
 
             tracker = PreferenceManager.getDefaultSharedPreferences(this);
 
-            int i = tracker.getInt("bundleNumber", 0);
+            int i = tracker.getInt("requestTracker", 0) +1;
 
             //Adding items to the bundle - output to user for SecondActivity (confirmation)
             bundle.putString("taskname"+i, TaskName.getText().toString());
@@ -222,6 +222,7 @@ public class RequestFormCreation extends AppCompatActivity {
             SharedPreferences.Editor editor = tracker.edit();
 
             editor.putInt("requestTracker", i);
+            editor.commit();
 
             //Securely Store items into bundle
             intent.putExtras(bundle);

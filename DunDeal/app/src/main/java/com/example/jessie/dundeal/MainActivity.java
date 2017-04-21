@@ -67,16 +67,22 @@ ASSUMPTIONS
 //##########################################################################
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class  MainActivity extends AppCompatActivity {
 
     TextView requestHeader;
+
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +91,7 @@ public class  MainActivity extends AppCompatActivity {
 
         CreateText();
         
-         View convertView;
+        View convertView;
         LayoutInflater inflater;
         TextView txt;
 
@@ -128,11 +134,12 @@ public class  MainActivity extends AppCompatActivity {
 
     public void CreateText() {
         Bundle bundle = getIntent().getExtras();
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         if(bundle != null) {
             //requestHeader = (TextView) findViewById(R.id.request_header);
             requestHeader = (TextView) findViewById(R.id.subtitle2);
-            requestHeader.setText(bundle.getString("taskname"));
+            requestHeader.setText(bundle.getString("taskname"+pref.getInt("requestTracker", 0)));
             //requestHeader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
         }
 
