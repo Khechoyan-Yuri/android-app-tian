@@ -26,17 +26,26 @@ public class MainActivity extends AppCompatActivity {
 
         myRef.child("User").setValue("Hello, World! Writing to DB Works!");
 
-        /*
+
+        ValueEventListener postListener = new ValueEventListener() {
+
         // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+       // myRef.addValueEventListener(new ValueEventListener() {
             public String TAG;
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
+
+                if(dataSnapshot.child("User").getValue(String.class) !=null) {
+                    String value = dataSnapshot.child("User").getValue(String.class);
+                    Log.d("READ_VALUE", "Value is: " + value);
+                }
+
+                else {
+                    Log.d("READ_VALUE", "Value is null");
+                }
             }
 
             @Override
@@ -44,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
-        });*/
+        };
+
+        myRef.addValueEventListener(postListener);
 
     }
 }

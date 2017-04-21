@@ -89,11 +89,16 @@ public class  MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         CreateText();
         
         View convertView;
         LayoutInflater inflater;
         TextView txt;
+
+        //used to keep track of what request number we are on
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         //essentially search database & populate the page, doing this in a loop for every result
         //we can probably set this up like the ViewAdapter hw if we want more efficiency
@@ -134,7 +139,6 @@ public class  MainActivity extends AppCompatActivity {
 
     public void CreateText() {
         Bundle bundle = getIntent().getExtras();
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         if(bundle != null) {
             //requestHeader = (TextView) findViewById(R.id.request_header);
@@ -168,5 +172,13 @@ public class  MainActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), SearchTasks.class);
 
         startActivity(i);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
     }
 }
