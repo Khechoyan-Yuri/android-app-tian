@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yuri_khechoyan.firebase_test.SearchTasks">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:layout_marginBottom="30dp">
+
+    <LinearLayout
+        android:id="@+id/RL_activity_search_tasks"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <!--example button. Will likely remove when database is ready, so we don't show false tasks-->
+        <RelativeLayout
+            android:layout_below="@id/task_header"
+            android:layout_gravity="center"
+            android:id="@+id/task_layout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:background="#8ed2d9">
+
+            <TextView
+                android:id="@+id/subtitle1"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nothing Right Now"/>
+
+
+            <Button
+                android:id="@+id/task_btn1"
+                android:layout_below="@id/subtitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:textSize="10dp"
+                android:onClick="DetailsLook"/>
+
+
+            <Button
+                android:id="@+id/task_btn2"
+                android:layout_below="@id/subtitle1"
+                android:layout_toRightOf="@id/task_btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accept"
+                android:textSize="15dp"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+        <!-- Two relative layouts because the inner one is the box and ScrollView can only hold one-->
+
+    </ScrollView>
+
+    <!-- CANCEL BUTTON -->
+    <Button
+        android:id="@+id/BackButton"
+        android:onClick="GoBack"
+        android:layout_below="@id/PaymentAmount"
+        android:text="Back"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
