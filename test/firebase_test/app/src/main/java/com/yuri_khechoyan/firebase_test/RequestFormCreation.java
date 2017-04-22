@@ -6,12 +6,16 @@ import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -20,6 +24,8 @@ import java.util.ArrayList;
 //***************
 
 public class RequestFormCreation extends AppCompatActivity {
+
+    int count;
 
     boolean U_confirm_submission;
 
@@ -213,27 +219,58 @@ public class RequestFormCreation extends AppCompatActivity {
 
             tracker = PreferenceManager.getDefaultSharedPreferences(this);
 
-            int i = tracker.getInt("requestTracker", 0) +1;
+            count = tracker.getInt("requestTracker", 0) +1;
 
             //Adding items to the bundle - output to user for SecondActivity (confirmation)
-            bundle.putString("taskname"+i, TaskName.getText().toString());
-            bundle.putString("tasklocation"+i,TaskLocation.getText().toString());
-            bundle.putString("details"+i, TaskDetails.getText().toString());
-            bundle.putString("payment"+i, TaskPayment.getText().toString());
-            bundle.putString("username"+i, UserName.getText().toString());
+            bundle.putString("taskname"+count, TaskName.getText().toString());
+            bundle.putString("tasklocation"+count,TaskLocation.getText().toString());
+            bundle.putString("details"+count, TaskDetails.getText().toString());
+            bundle.putString("payment"+count, TaskPayment.getText().toString());
+            bundle.putString("username"+count, UserName.getText().toString());
 
             //Initializes database reference to database "message"
             myRef = FirebaseDatabase.getInstance().getReference("message");
 
-            myRef.child("User").child("username"+i).setValue(UserName.getText().toString());
-            myRef.child("TaskName").child("taskname"+i).setValue(TaskName.getText().toString());
-            myRef.child("TaskLocation").child("tasklocation"+i).setValue(TaskLocation.getText().toString());
-            myRef.child("Details").child("details"+i).setValue(TaskDetails.getText().toString());
-            myRef.child("Payment").child("payment"+i).setValue(TaskPayment.getText().toString());
+            myRef.child("User").child("username"+count).setValue(UserName.getText().toString());
+            myRef.child("TaskName").child("taskname"+count).setValue(TaskName.getText().toString());
+            myRef.child("TaskLocation").child("tasklocation"+count).setValue(TaskLocation.getText().toString());
+            myRef.child("Details").child("details"+count).setValue(TaskDetails.getText().toString());
+            myRef.child("Payment").child("payment"+count).setValue(TaskPayment.getText().toString());
+
+            ValueEventListener postListener = new ValueEventListener() {
+
+                // Read from the database
+                // myRef.addValueEventListener(new ValueEventListener() {
+                public String TAG;
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+
+                    if(dataSnapshot.child("TaskName").child("taskname"+count).getValue(String.class) !=null) {
+                        String value = dataSnapshot.child("TaskName").child("taskname"+count).getValue(String.class);
+                        Log.d("READ_VALUE", "Value is: " + value);
+                    }
+
+                    else {
+                        Log.d("READ_VALUE", "Value is null");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException());
+                }
+            };
+
+            myRef.addValueEventListener(postListener);
+
 
             SharedPreferences.Editor editor = tracker.edit();
 
-            editor.putInt("requestTracker", i);
+            editor.putInt("requestTracker", count);
             editor.commit();
 
             //Securely Store items into bundle

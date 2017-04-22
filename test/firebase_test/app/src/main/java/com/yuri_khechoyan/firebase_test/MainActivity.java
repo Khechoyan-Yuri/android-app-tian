@@ -90,16 +90,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //used to keep track of what request number we are on
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         CreateText();
 
         View convertView;
         LayoutInflater inflater;
         TextView txt;
-
-        //used to keep track of what request number we are on
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         //essentially search database & populate the page, doing this in a loop for every result
         //we can probably set this up like the ViewAdapter hw if we want more efficiency
