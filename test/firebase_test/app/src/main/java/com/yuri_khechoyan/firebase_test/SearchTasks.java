@@ -3,17 +3,31 @@ package com.yuri_khechoyan.firebase_test;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class SearchTasks extends AppCompatActivity {
+
+    DatabaseReference myRef;
+
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_tasks);
+
 
         View convertView;
 
@@ -31,6 +45,37 @@ public class SearchTasks extends AppCompatActivity {
         txt.setText("Example changed title");//example of changin title as we would when fetching from database
         //We would also place an onclick method here for the buttons, which would take us to appropriate details
         //and add the task to accepted tasks
+
+        myRef = FirebaseDatabase.getInstance().getReference("message");
+
+        ValueEventListener userListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                layout = (LinearLayout) findViewById(R.id.ST_Layout);
+                for(int i =1; dataSnapshot.child("User").child("user" + i).getValue(String.class) != null; i++)
+                    if(dataSnapshot.child("User").child("user" + i).getValue(String.class) != null) {
+                        Button btn = new Button(getApplicationContext());
+
+                        btn.setText("User: "+dataSnapshot.child("User").child("user" + i).getValue(String.class)
+                        +"\nTask: "+dataSnapshot.child("TaskName").child("taskname" + i).getValue(String.class)
+                        +"\nLocation: "+dataSnapshot.child("TaskLocation").child("tasklocation" + i).getValue(String.class)
+                        +"\nPayment: "+dataSnapshot.child("Payment").child("payment" + i).getValue(String.class));
+
+                        layout.addView(btn);
+
+                    }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("Canceled", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+        myRef.addValueEventListener(userListener);
 
     }
 

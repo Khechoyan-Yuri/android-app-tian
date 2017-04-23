@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/ST_Layout"
     tools:context="com.yuri_khechoyan.firebase_test.SearchTasks">
 
     <ScrollView
