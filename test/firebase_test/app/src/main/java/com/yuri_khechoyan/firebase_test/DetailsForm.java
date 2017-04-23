@@ -21,15 +21,17 @@ public class DetailsForm extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        //TODO: get info from database.
+
         if(intent.hasExtra("username"+0)) {
             taskname.setText(intent.getStringExtra("username"+0));
         }
-        username.setText("Coffee");
+        username.setText("CoffeeUser");
 
         if(intent.hasExtra("taskname"+0)) {
-           details.setText(intent.getStringExtra("taskname"+0));
+           taskname.setText(intent.getStringExtra("taskname"+0));
         }
-        details.setText("Get me some coffee");
+        taskname.setText("Get me some coffee");
 
         if(intent.hasExtra("details"+0)){
             details.setText(intent.getStringExtra("details"+0));
@@ -49,6 +51,12 @@ public class DetailsForm extends AppCompatActivity {
 
     public void GoBack(View v) {
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = getIntent();
+        if(intent.hasExtra("source")) {
+            if(intent.getStringExtra("source").equals("search")){
+                i = new Intent(getApplicationContext(), SearchTasks.class);
+            } //basically check and see our source and try to return to that
+        }
 
         startActivity(i);
     }

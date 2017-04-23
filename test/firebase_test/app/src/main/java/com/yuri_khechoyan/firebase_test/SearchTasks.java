@@ -79,6 +79,12 @@ public class SearchTasks extends AppCompatActivity {
 
     }
 
+    public void DetailsLook(View v) {
+        Intent i = new Intent(getApplicationContext(), DetailsForm.class);
+        i.putExtra("source", "search");
+        startActivity(i);
+    }
+
 
     public void GoBack(View v) {
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
