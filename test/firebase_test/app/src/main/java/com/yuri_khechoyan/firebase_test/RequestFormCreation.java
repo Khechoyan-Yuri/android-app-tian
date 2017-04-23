@@ -11,10 +11,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -32,6 +34,14 @@ public class RequestFormCreation extends AppCompatActivity {
     SharedPreferences tracker;
 
     DatabaseReference myRef;
+
+    boolean username_exists;
+
+    EditText name_Username;
+
+    String verify_username;
+
+
 
 
 
@@ -101,7 +111,7 @@ public class RequestFormCreation extends AppCompatActivity {
 
 
         //Receive Text input from user, converting toString()
-        String verify_username = UserName.getText().toString();
+        verify_username = UserName.getText().toString();
         String verify_taskName = TaskName.getText().toString();
         String verify_taskDetails = TaskDetails.getText().toString();
         String verify_taskLocation = TaskLocation.getText().toString();
@@ -128,51 +138,45 @@ public class RequestFormCreation extends AppCompatActivity {
         }
 
         //Verifying if Username is empty or not | UN = Username Entry
-        if(verify_username.equals("")){
+        if (verify_username.equals("")) {
             Toast.makeText(this, "Username was not Entered", Toast.LENGTH_SHORT).show();
             UN_confirm_submission = false;
-        }
-        else{
+        } else {
             UN_confirm_submission = true;
         }
 
         //Verifying if Task Name is empty or not | TN = Task Name Entry
-        if(verify_taskName.equals("")){
+        if (verify_taskName.equals("")) {
             Toast.makeText(this, "Task Name was not Entered", Toast.LENGTH_SHORT).show();
             TN_confirm_submission = false;
-        }
-        else{
+        } else {
             TN_confirm_submission = true;
         }
 
         //Verifying if Task Details is empty or not | TD = Task Details Entry
-        if(verify_taskDetails.equals("")){
+        if (verify_taskDetails.equals("")) {
             Toast.makeText(this, "Task Details were not Entered", Toast.LENGTH_SHORT).show();
             TD_confirm_submission = false;
-        }
-        else{
+        } else {
             TD_confirm_submission = true;
         }
 
         //Verifying if Task Location was empty or not | TL = Task Location Entry
-        if(verify_taskLocation.equals("")){
+        if (verify_taskLocation.equals("")) {
             Toast.makeText(this, "Task Location was not Entered", Toast.LENGTH_SHORT).show();
             TL_confirm_submission = false;
-        }
-        else{
+        } else {
             TL_confirm_submission = true;
         }
 
         //Verifying if Task Payment was empty or not | TP = Task Payment Entry
-        if(verify_taskPayment.equals("")){
+        if (verify_taskPayment.equals("")) {
             Toast.makeText(this, "Task Payment was not Entered", Toast.LENGTH_SHORT).show();
             TP_confirm_submission = false;
-        }
-        else if (Float.parseFloat(verify_taskPayment) < 5){
+        } else if (Float.parseFloat(verify_taskPayment) < 5) {
             Toast.makeText(this, "Minimum payment is $5", Toast.LENGTH_SHORT).show();
             TP_confirm_submission = false;
-        }
-        else{
+        } else {
             TP_confirm_submission = true;
         }
 
@@ -181,102 +185,106 @@ public class RequestFormCreation extends AppCompatActivity {
         //**************************************
 
 
-
         //************************************************
         // BUNDLE LOGIC - ---Needs Modification---
         //************************************************
+
+
+        //Initializes database reference to database "message"
+        myRef = FirebaseDatabase.getInstance().getReference("message");
+
+        //Tests whether the username exists or not in the database
+        username_exists = false;
 
 
         //Verifying that Username DOES NOT exist in database (string.xml file)
         //If username already exists, clear field & ask user to register a different username
         //If ArrayList contains pre-existing UserName (List matches user input) - throw toast
         //U = UserName
-        if(name_Username.contains(verify_username.toString().trim()) || verify_username.toString().equals("")) {
-            UserName.setText("");
-            Toast.makeText(getApplicationContext(), "Username is already Registered or was not Entered",
-                    Toast.LENGTH_LONG).show();
+            if (name_Username.contains(verify_username.toString().trim()) || verify_username.toString().equals("")
+                    || username_exists == true) {
 
-            U_confirm_submission = false;
-        }
-        else{
-            U_confirm_submission = true;
-        }
+                UserName.setText("");
+                Toast.makeText(getApplicationContext(), "Username is already Registered or was not Entered",
+                        Toast.LENGTH_LONG).show();
 
-        //Create OVERALL Verification Boolean
-        boolean final_confirm_submission = UN_confirm_submission && TN_confirm_submission &&
-                TD_confirm_submission && TL_confirm_submission && TP_confirm_submission;
+                U_confirm_submission = false;
+            } else {
+                U_confirm_submission = true;
+            }
 
-        if(final_confirm_submission == false){
-        }
-        else{
-            Toast.makeText(this, "Submission Complete", Toast.LENGTH_SHORT).show();
+            //Create OVERALL Verification Boolean
+            boolean final_confirm_submission = UN_confirm_submission && TN_confirm_submission &&
+                    TD_confirm_submission && TL_confirm_submission && TP_confirm_submission;
 
-            //If all matching fields match (emails, passwords - when submit button is pressed)
-            //onClick() method is called
-            //Initializes Intent and bundle for moving data from one activity to another
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            Bundle bundle = new Bundle();
+            if (final_confirm_submission == false) {
+            } else {
+                Toast.makeText(this, "Submission Complete", Toast.LENGTH_SHORT).show();
 
-            tracker = PreferenceManager.getDefaultSharedPreferences(this);
+                //If all matching fields match (emails, passwords - when submit button is pressed)
+                //onClick() method is called
+                //Initializes Intent and bundle for moving data from one activity to another
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Bundle bundle = new Bundle();
 
-            count = tracker.getInt("requestTracker", 0) +1;
+                tracker = PreferenceManager.getDefaultSharedPreferences(this);
 
-            //Adding items to the bundle - output to user for SecondActivity (confirmation)
-            bundle.putString("taskname"+count, TaskName.getText().toString());
-            bundle.putString("tasklocation"+count,TaskLocation.getText().toString());
-            bundle.putString("details"+count, TaskDetails.getText().toString());
-            bundle.putString("payment"+count, TaskPayment.getText().toString());
-            bundle.putString("username"+count, UserName.getText().toString());
+                count = tracker.getInt("requestTracker", 0) + 1;
 
-            //Initializes database reference to database "message"
-            myRef = FirebaseDatabase.getInstance().getReference("message");
+                //Adding items to the bundle - output to user for SecondActivity (confirmation)
+                bundle.putString("taskname" + count, TaskName.getText().toString());
+                bundle.putString("tasklocation" + count, TaskLocation.getText().toString());
+                bundle.putString("details" + count, TaskDetails.getText().toString());
+                bundle.putString("payment" + count, TaskPayment.getText().toString());
+                bundle.putString("username" + count, UserName.getText().toString());
 
-            myRef.child("User").child("username"+count).setValue(UserName.getText().toString());
-            myRef.child("TaskName").child("taskname"+count).setValue(TaskName.getText().toString());
-            myRef.child("TaskLocation").child("tasklocation"+count).setValue(TaskLocation.getText().toString());
-            myRef.child("Details").child("details"+count).setValue(TaskDetails.getText().toString());
-            myRef.child("Payment").child("payment"+count).setValue(TaskPayment.getText().toString());
+                myRef.child("User").child("username" + count).setValue(UserName.getText().toString());
 
-            ValueEventListener postListener = new ValueEventListener() {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                //Determines if the username exists
 
-                // Read from the database
-                // myRef.addValueEventListener(new ValueEventListener() {
-                public String TAG;
 
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
+                ValueEventListener userListener = new ValueEventListener() {
 
-                    if(dataSnapshot.child("TaskName").child("taskname"+count).getValue(String.class) !=null) {
-                        String value = dataSnapshot.child("TaskName").child("taskname"+count).getValue(String.class);
-                        Log.d("READ_VALUE", "Value is: " + value);
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for(int i =1; dataSnapshot.child("User").child("user" + i).getValue(String.class) != null; i++)
+                        if (verify_username.equals(dataSnapshot.child("User").child("user" + i).getValue(String.class))) {
+                                username_exists = true;
+                                if(myRef.child("User").child("user" + count) != null) {
+                                    myRef.child("User").child("user" + count).removeValue();
+                                }
+
+                            }
+                        }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Getting Post failed, log a message
+                        Log.w("Canceled", "loadPost:onCancelled", databaseError.toException());
+                        // ...
                     }
+                };
+                myRef.addValueEventListener(userListener);
 
-                    else {
-                        Log.d("READ_VALUE", "Value is null");
-                    }
+                if(username_exists) {
+                    myRef.child("TaskName").child("taskname" + count).setValue(TaskName.getText().toString());
+                    myRef.child("TaskLocation").child("tasklocation" + count).setValue(TaskLocation.getText().toString());
+                    myRef.child("Details").child("details" + count).setValue(TaskDetails.getText().toString());
+                    myRef.child("Payment").child("payment" + count).setValue(TaskPayment.getText().toString());
                 }
 
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Log.w(TAG, "Failed to read value.", error.toException());
-                }
-            };
+                SharedPreferences.Editor editor = tracker.edit();
 
-            myRef.addValueEventListener(postListener);
+                editor.putInt("requestTracker", count);
+                editor.commit();
 
-
-            SharedPreferences.Editor editor = tracker.edit();
-
-            editor.putInt("requestTracker", count);
-            editor.commit();
-
-            //Securely Store items into bundle
-            intent.putExtras(bundle);
-            //Start the Activity
-            startActivity(intent);
+                //Securely Store items into bundle
+                intent.putExtras(bundle);
+                //Start the Activity
+                startActivity(intent);
+            }
         }
-    }
 }
