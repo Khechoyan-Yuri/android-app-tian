@@ -1,8 +1,7 @@
-
 <resources>
-<string name="app_name">firebase_test</string>
-<array name="username_array">
+    <string name="app_name">firebase_test</string>
+    <array name="username_array">
 
 
-</array>
+    </array>
 </resources>

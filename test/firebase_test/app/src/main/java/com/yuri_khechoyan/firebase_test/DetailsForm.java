@@ -18,6 +18,7 @@ public class DetailsForm extends AppCompatActivity {
         TextView details = (TextView) findViewById(R.id.Details);
         TextView location = (TextView) findViewById(R.id.Location);
         TextView paymentamount = (TextView) findViewById(R.id.PaymentAmount);
+        TextView completion = (TextView) findViewById(R.id.tv_Completion);
 
         Intent intent = getIntent();
 
@@ -47,6 +48,15 @@ public class DetailsForm extends AppCompatActivity {
             paymentamount.setText(intent.getStringExtra("payment"+0));
         }
         paymentamount.setText("$25");
+
+        if(intent.hasExtra("completion")){//TODO: might be able to replace this with a database check?
+            if(intent.getBooleanExtra("completion", false)){
+                completion.setText("You have marked this task complete. The requester will be asked" +
+                        " to confirm, then your pay will be trasnfered. Please contact an administrator" +
+                        " if your payment isn't transferred within two days.");
+                //TODO: replace 'the requester' with the username of the requester (get from database)
+            }
+        }
     }
 
     public void GoBack(View v) {

@@ -123,13 +123,25 @@
         android:layout_alignParentEnd="true"
         android:layout_toRightOf="@+id/tv_PaymentAmount"
         android:layout_toEndOf="@+id/tv_PaymentAmount" />
+
+
+        <TextView
+            android:id="@+id/tv_Completion"
+            android:text=""
+            android:textSize="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="47dp"
+            android:layout_below="@+id/tv_PaymentAmount"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
         
         
     <!-- CANCEL BUTTON -->
     <Button
         android:id="@+id/BackButton"
         android:onClick="GoBack"
-        android:layout_below="@id/PaymentAmount"
+        android:layout_below="@id/tv_Completion"
         android:text="Back"
         android:layout_marginTop="30dp"
         android:layout_width="wrap_content"

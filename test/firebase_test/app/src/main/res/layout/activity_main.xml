@@ -32,43 +32,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_gravity="center"
-                    android:id="@+id/task_layout"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="#8ed2d9">
-
-                    <TextView
-                        android:id="@+id/subtitle1"
-                        android:layout_centerHorizontal="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nothing Right Now"/>
-
-
-                    <Button
-                        android:id="@+id/task_btn1"
-                        android:layout_below="@id/subtitle1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Details"
-                        android:textSize="10dp"
-                        android:onClick="DetailsLook"/>
-
-
-                    <Button
-                        android:id="@+id/task_btn2"
-                        android:layout_below="@id/subtitle1"
-                        android:layout_toRightOf="@id/task_btn1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Complete"
-                        android:textSize="15dp"/>
-
-
-                </RelativeLayout>
+                <!--Requests will appear in here-->
 
             </LinearLayout>
 
@@ -113,39 +77,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    android:id="@+id/request_layout"
-                    android:layout_gravity="center"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="#8ed2d9">
-
-                    <TextView
-                        android:id="@+id/subtitle2"
-                        android:layout_centerHorizontal="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nothing Right Now"/>
-
-
-                    <Button
-                        android:id="@+id/request_btn1text"
-                        android:layout_below="@id/subtitle2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Not Accepted"
-                        android:textSize="10dp" />
-                    <Button
-                        android:id="@+id/request_btn2text"
-                        android:layout_below="@id/subtitle2"
-                        android:layout_toRightOf="@id/request_btn1text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Edit"
-                        android:textSize="15dp"/>
-
-                </RelativeLayout>
+              <!--Requests will appear in here-->
 
             </LinearLayout>
 

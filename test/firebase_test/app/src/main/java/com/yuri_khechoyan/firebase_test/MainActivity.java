@@ -72,8 +72,10 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -98,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         View convertView;
         LayoutInflater inflater;
         TextView txt;
+        Button btn1;
+        Button btn2;
 
         //essentially search database & populate the page, doing this in a loop for every result
         //we can probably set this up like the ViewAdapter hw if we want more efficiency
@@ -116,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
             txt.setText("Example changed title" + i);//example of changing title as we would when fetching from database
             //We would also place an onclick method here for the buttons, which would take us to appropriate details
             //and add the task to accepted tasks
+
+            //TODO: If task is marked complete (check via database?) change its button to 'COMPLETED'
+
         }//end for loop
 
         //essentially do the same thing for the requests
@@ -132,19 +139,47 @@ public class MainActivity extends AppCompatActivity {
         txt.setText("Example changed title2");//example of changing title as we would when fetching from database
         //We would also place an onclick method here for the buttons, which would take us to appropriate details
         //and add the task to accepted tasks
+        btn1 = (Button) convertView.findViewById(R.id.request_btn1text);
+        //TODO: Database: if(acceptedbySomeone){
+        btn1.setText("User accepted");
+        //replace 'user' with username? only that risks messing with button size. Maybe just 'accepted'
+        btn2 = (Button) convertView.findViewById(R.id.request_btn2text);
+        /* only necessary if we add a contact feature)
+        btn2.setText("Contact");
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //do nothing, for now. Can replace with a contact feature if we make one
+                //I doubt we will, so we might want to just remove the functionality
+            }
+        }); */
+        //in the mean time
+        btn2.setVisibility(View.GONE);
+        //} else if (TODO: completed by someone){
+        btn1.setText("Completed");
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Completed.class);
+
+                startActivity(i);
+            }
+        });
+        //}
+
         // }//end for loop
 
     }
 
     public void CreateText() {
-        Bundle bundle = getIntent().getExtras();
+       // Bundle bundle = getIntent().getExtras();
 
-        if(bundle != null) {
-            //requestHeader = (TextView) findViewById(R.id.request_header);
-            requestHeader = (TextView) findViewById(R.id.subtitle2);
-            requestHeader.setText(bundle.getString("taskname"+pref.getInt("requestTracker", 0)));
-            //requestHeader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
-        }
+      //  if(bundle != null) {
+      //      //requestHeader = (TextView) findViewById(R.id.request_header);
+      //      requestHeader = (TextView) findViewById(R.id.subtitle2);
+      //      requestHeader.setText(bundle.getString("taskname"+pref.getInt("requestTracker", 0)));
+      //      //requestHeader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
+      //  } TODO: Is this necessary? Commented out since it seems like just an example of change
 
     }
 
@@ -161,9 +196,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void Complete(View v) {
+        Intent i = new Intent(getApplicationContext(), DetailsForm.class);
+        i.putExtra("completion", true);
+        //TODO: set 'completed' in database
+        startActivity(i);
+    }
+
     public void EditRequest(View v) {
         Intent i = new Intent(getApplicationContext(), RequestFormCreation.class);
-
+        //TODO: connect RequestFormCreation with database to get and change info
+        i.putExtra("source", "edit");//basically just an extra to say we want to edit instead of make new
+        //put an extra to indicate which task needs to be edited?
         startActivity(i);
     }
 
