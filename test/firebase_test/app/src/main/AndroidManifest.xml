@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RequestFormCreation"></activity>
+        <activity android:name=".RequestFormCreation"/>
+        <activity android:name=".DetailsForm"/>
+        <activity android:name=".DataBase"/>
+        <activity android:name=".SearchTasks"/>
     </application>
 
 </manifest>
