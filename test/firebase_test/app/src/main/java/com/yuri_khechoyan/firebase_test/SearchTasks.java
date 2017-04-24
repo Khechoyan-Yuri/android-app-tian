@@ -18,17 +18,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SearchTasks extends AppCompatActivity {
 
     DatabaseReference myRef;
 
-    ArrayList<View> convertView;
+    View convertView;
 
     LayoutInflater inflater;
 
     LinearLayout activity_search_tasks;
+
+    Button accept;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +46,17 @@ public class SearchTasks extends AppCompatActivity {
         //for (int i = 0; i < options.length; i++) { //for each of the items in the database
         inflater = getLayoutInflater();
 
-        TextView txt = (TextView) convertView.get(0).findViewById(R.id.box_subtitle1);
+       /* TextView txt = (TextView) convertView.get(0).findViewById(R.id.box_subtitle1);
         txt.setText("Example changed title");//example of changing title as we would when fetching from database
         //We would also place an onclick method here for the buttons, which would take us to appropriate details
         //and add the task to accepted tasks
-        Button accept = (Button) convertView.get(0).findViewById(R.id.box_task_btn2);
-        accept.setOnClickListener(new View.OnClickListener() {
+        accept.add((Button) convertView.get(0).findViewById(R.id.box_task_btn2));
+        accept.get(0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: in Database, set 'accepted', set Dundee to the current user
             }
-        });
+        });*/
 
         myRef = FirebaseDatabase.getInstance().getReference("message");
 
@@ -64,20 +67,28 @@ public class SearchTasks extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Button btn = new Button(getApplicationContext());
 
                 Toast.makeText(getApplicationContext(), dataSnapshot.child("User").child("username" + 1).getValue(String.class), Toast.LENGTH_LONG).show();
 
                 for (int i = 1; dataSnapshot.child("User").child("username" + i).getValue(String.class) != null; i++) {
 
-                    convertView.add(inflater.inflate(R.layout.box, null));
-                    activity_search_tasks.addView(convertView.get(i));
+                    convertView = inflater.inflate(R.layout.box, null);
+                    activity_search_tasks.addView(convertView);
 
-                    TextView txt = (TextView) convertView.get(i).findViewById(R.id.box_subtitle1);
+                    TextView txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
                     txt.setText(dataSnapshot.child("TaskName").child("taskname" + i).getValue(String.class));//example of changing title as we would when fetching from database
                     //We would also place an onclick method here for the buttons, which would take us to appropriate details
                     //and add the task to accepted tasks
-                    Button accept = (Button) convertView.get(i).findViewById(R.id.box_task_btn2);
+                    accept = (Button) convertView.findViewById(R.id.box_task_btn2);
+
+                    accept.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                            startActivity(intent);
+                        }
+                    });
 
                 }
 
