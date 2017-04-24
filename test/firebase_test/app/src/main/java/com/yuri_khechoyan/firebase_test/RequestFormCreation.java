@@ -250,11 +250,11 @@ public class RequestFormCreation extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        for(int i =1; dataSnapshot.child("User").child("user" + i).getValue(String.class) != null; i++)
+                        for(int i =1; dataSnapshot.child("User").child("username" + i).getValue(String.class) != null; i++)
                         if (verify_username.equals(dataSnapshot.child("User").child("user" + i).getValue(String.class))) {
                                 username_exists = true;
-                                if(myRef.child("User").child("user" + count) != null) {
-                                    myRef.child("User").child("user" + count).removeValue();
+                                if(myRef.child("User").child("username" + count) != null) {
+                                    myRef.child("User").child("username" + count).removeValue();
                                 }
 
                             }

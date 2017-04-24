@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,11 +18,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class SearchTasks extends AppCompatActivity {
 
     DatabaseReference myRef;
 
-    LinearLayout layout;
+    ArrayList<View> convertView;
+
+    LayoutInflater inflater;
+
+    LinearLayout activity_search_tasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,23 +36,18 @@ public class SearchTasks extends AppCompatActivity {
         setContentView(R.layout.activity_search_tasks);
 
 
-        View convertView;
-
         //essentially search database & populate the page, doing this in a loop for every result
         //we can probably set this up like the ViewAdapter hw if we want more efficiency
         //but the priority right now is completion, not perfection
-        LayoutInflater inflater;
-        LinearLayout activity_search_tasks = (LinearLayout) findViewById(R.id.RL_activity_search_tasks);
+        activity_search_tasks = (LinearLayout) findViewById(R.id.RL_activity_search_tasks);
         //for (int i = 0; i < options.length; i++) { //for each of the items in the database
         inflater = getLayoutInflater();
-        convertView = inflater.inflate(R.layout.box, null);
-        activity_search_tasks.addView(convertView);
 
-        TextView txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
+        TextView txt = (TextView) convertView.get(0).findViewById(R.id.box_subtitle1);
         txt.setText("Example changed title");//example of changing title as we would when fetching from database
         //We would also place an onclick method here for the buttons, which would take us to appropriate details
         //and add the task to accepted tasks
-        Button accept = (Button) convertView.findViewById(R.id.box_task_btn2);
+        Button accept = (Button) convertView.get(0).findViewById(R.id.box_task_btn2);
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,35 +57,42 @@ public class SearchTasks extends AppCompatActivity {
 
         myRef = FirebaseDatabase.getInstance().getReference("message");
 
+        myRef.child("Dummy").setValue("");
+
         ValueEventListener userListener = new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                layout = (LinearLayout) findViewById(R.id.ST_Layout);
-                for(int i =1; dataSnapshot.child("User").child("user" + i).getValue(String.class) != null; i++)
-                    if(dataSnapshot.child("User").child("user" + i).getValue(String.class) != null) {
-                        Button btn = new Button(getApplicationContext());
 
-                        btn.setText("User: "+dataSnapshot.child("User").child("user" + i).getValue(String.class)
-                        +"\nTask: "+dataSnapshot.child("TaskName").child("taskname" + i).getValue(String.class)
-                        +"\nLocation: "+dataSnapshot.child("TaskLocation").child("tasklocation" + i).getValue(String.class)
-                        +"\nPayment: "+dataSnapshot.child("Payment").child("payment" + i).getValue(String.class));
+                Button btn = new Button(getApplicationContext());
 
-                        layout.addView(btn);
+                Toast.makeText(getApplicationContext(), dataSnapshot.child("User").child("username" + 1).getValue(String.class), Toast.LENGTH_LONG).show();
 
-                    }
+                for (int i = 1; dataSnapshot.child("User").child("username" + i).getValue(String.class) != null; i++) {
+
+                    convertView.add(inflater.inflate(R.layout.box, null));
+                    activity_search_tasks.addView(convertView.get(i));
+
+                    TextView txt = (TextView) convertView.get(i).findViewById(R.id.box_subtitle1);
+                    txt.setText(dataSnapshot.child("TaskName").child("taskname" + i).getValue(String.class));//example of changing title as we would when fetching from database
+                    //We would also place an onclick method here for the buttons, which would take us to appropriate details
+                    //and add the task to accepted tasks
+                    Button accept = (Button) convertView.get(i).findViewById(R.id.box_task_btn2);
+
+                }
 
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled (DatabaseError databaseError){
                 // Getting Post failed, log a message
                 Log.w("Canceled", "loadPost:onCancelled", databaseError.toException());
                 // ...
             }
-        };
-        myRef.addValueEventListener(userListener);
 
+        };
+
+        myRef.addListenerForSingleValueEvent(userListener);
     }
 
     public void DetailsLook(View v) {
