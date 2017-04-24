@@ -10,24 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- USERNAME TextViews -->
-        <TextView
-            android:id="@+id/tv_UserName"
-            android:text="Username: "
-            android:textSize="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/UserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tv_UserName"
-            android:layout_alignBottom="@+id/tv_UserName"
-            android:layout_toEndOf="@+id/tv_UserName"
-            android:ems="10"
-            android:textSize="20dp"/>
 
         <!--  Task Name TextViews-->
         <TextView
@@ -36,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tv_UserName"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:text="Task Name: "
             android:textSize="24dp" />
 
@@ -72,68 +54,53 @@
             android:layout_alignBottom="@+id/tv_Details"
             android:layout_toEndOf="@+id/tv_Details" />
 
-        <!--  Location TextViews -->
+<LinearLayout
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@+id/tv_Details">
         <TextView
-            android:id="@+id/tv_Location"
-            android:text="Task Location: "
+            android:id="@+id/confirmq"
             android:textSize="24dp"
-            android:layout_marginTop="68dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Task has been marked complete."
+            android:layout_marginTop="46dp" />
+
+        <EditText
+            android:id="@+id/tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:visibility="gone"/>
+
+</LinearLayout>
+
+        <!--may implement disagree button in the future
+        <Button
+            android:id="@+id/btn_not_completed"
+            android:layout_below="@id/box_subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_Details"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:text="Details"
+            android:textSize="10dp"
+            android:onClick="DetailsLook"/>
+            -->
 
-        <TextView
-            android:id="@+id/Location"
+
+        <Button
+            android:id="@+id/btn_completed"
+            android:layout_below="@id/ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="20dp"
-            android:layout_alignBaseline="@+id/tv_Location"
-            android:layout_alignBottom="@+id/tv_Location"
-            android:layout_toRightOf="@+id/tv_Location"
-            android:layout_toEndOf="@+id/tv_Location" />
+            android:layout_centerInParent="true"
+            android:text="Confirm"
+            android:onClick="Confirm"
+            android:layout_marginTop="15dp"
+            android:textSize="30dp"/>
 
-        <!--  Payment Amount TextViews -->
-        <TextView
-            android:id="@+id/tv_PaymentAmount"
-            android:text="Payment Amount: "
-            android:textSize="24dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="47dp"
-            android:layout_below="@+id/tv_Location"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:id="@+id/PaymentAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="20dp"
-            android:layout_alignBaseline="@+id/tv_PaymentAmount"
-            android:layout_alignBottom="@+id/tv_PaymentAmount"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toRightOf="@+id/tv_PaymentAmount"
-            android:layout_toEndOf="@+id/tv_PaymentAmount" />
-
-
-        <TextView
-            android:id="@+id/tv_Completion"
-            android:text=""
-            android:textSize="24dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="47dp"
-            android:layout_below="@+id/tv_PaymentAmount"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-
-        <!-- CANCEL BUTTON
+        <!-- CANCEL BUTTON I don't think this should be an option, due to the potential misuse
         <Button
             android:id="@+id/BackButton"
             android:onClick="GoBack"
@@ -141,8 +108,8 @@
             android:text="Back"
             android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />-->
+            android:layout_height="wrap_content"/>
+            -->
 
 
     </RelativeLayout>

@@ -45,6 +45,13 @@ public class SearchTasks extends AppCompatActivity {
         txt.setText("Example changed title");//example of changing title as we would when fetching from database
         //We would also place an onclick method here for the buttons, which would take us to appropriate details
         //and add the task to accepted tasks
+        Button accept = (Button) convertView.findViewById(R.id.box_task_btn2);
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: in Database, set 'accepted', set Dundee to the current user
+            }
+        });
 
         myRef = FirebaseDatabase.getInstance().getReference("message");
 

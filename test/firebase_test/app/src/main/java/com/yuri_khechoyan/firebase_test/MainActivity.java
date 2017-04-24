@@ -69,6 +69,7 @@ ASSUMPTIONS
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -154,10 +155,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }); */
         //in the mean time
-        btn2.setVisibility(View.GONE);
+
         //} else if (TODO: completed by someone){
-        btn1.setText("Completed");
-        btn1.setOnClickListener(new View.OnClickListener() {
+        btn1.setVisibility(View.GONE);
+        btn2.setText("Completed");
+        btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), Completed.class);
@@ -166,7 +168,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //}
+       // RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+       // params.addRule();
+       // btn1.setLayoutParams(params);
+        RelativeLayout.LayoutParams testLP = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
+        testLP.addRule(RelativeLayout.CENTER_IN_PARENT);
+        testLP.addRule(RelativeLayout.BELOW, txt.getId());
+
+        btn2.setLayoutParams(testLP);
+        //convertView.setGravity(Gravity.CENTER);
         // }//end for loop
 
     }
