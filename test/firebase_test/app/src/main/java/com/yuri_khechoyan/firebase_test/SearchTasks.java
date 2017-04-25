@@ -33,6 +33,8 @@ public class SearchTasks extends AppCompatActivity {
 
     Button accept;
 
+    Button details;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,12 +83,21 @@ public class SearchTasks extends AppCompatActivity {
                     //and add the task to accepted tasks
                     accept = (Button) convertView.findViewById(R.id.box_task_btn2);
 
+                    details = (Button) convertView.findViewById(R.id.box_task_btn1);
+
                     accept.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
                             startActivity(intent);
+                        }
+                    });
+
+                    details.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
                         }
                     });
 

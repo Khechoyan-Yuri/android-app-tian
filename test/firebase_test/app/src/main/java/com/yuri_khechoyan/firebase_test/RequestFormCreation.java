@@ -41,7 +41,17 @@ public class RequestFormCreation extends AppCompatActivity {
 
     String verify_username;
 
+    EditText Sub_UserName;
 
+    EditText Sub_TaskName;
+
+    EditText Sub_TaskDetails;
+
+    EditText Sub_TaskLocation;
+
+    EditText Sub_TaskPayment;
+
+    SharedPreferences.Editor editor;
 
 
 
@@ -103,19 +113,19 @@ public class RequestFormCreation extends AppCompatActivity {
 
         //Initializes and extracts Values to store into a bundle
         //for moving data to another activity
-        EditText UserName = (EditText) findViewById(R.id.et_UserName);
-        EditText TaskName = (EditText) findViewById(R.id.et_TaskName);
-        EditText TaskDetails = (EditText) findViewById(R.id.et_Details);
-        EditText TaskLocation = (EditText) findViewById(R.id.et_Location);
-        EditText TaskPayment = (EditText) findViewById(R.id.et_PaymentAmount);
+        Sub_UserName = (EditText) findViewById(R.id.et_UserName);
+        Sub_TaskName = (EditText) findViewById(R.id.et_TaskName);
+        Sub_TaskDetails = (EditText) findViewById(R.id.et_Details);
+        Sub_TaskLocation = (EditText) findViewById(R.id.et_Location);
+        Sub_TaskPayment = (EditText) findViewById(R.id.et_PaymentAmount);
 
 
         //Receive Text input from user, converting toString()
-        verify_username = UserName.getText().toString();
-        String verify_taskName = TaskName.getText().toString();
-        String verify_taskDetails = TaskDetails.getText().toString();
-        String verify_taskLocation = TaskLocation.getText().toString();
-        String verify_taskPayment = TaskPayment.getText().toString();
+        verify_username = Sub_UserName.getText().toString();
+        String verify_taskName = Sub_TaskName.getText().toString();
+        String verify_taskDetails = Sub_TaskDetails.getText().toString();
+        String verify_taskLocation = Sub_TaskLocation.getText().toString();
+        String verify_taskPayment = Sub_TaskPayment.getText().toString();
 
         //These booleans will be used to help identify if application
         //can move onto the 2nd Activity
@@ -204,7 +214,7 @@ public class RequestFormCreation extends AppCompatActivity {
             if (name_Username.contains(verify_username.toString().trim()) || verify_username.toString().equals("")
                     || username_exists == true) {
 
-                UserName.setText("");
+                Sub_UserName.setText("");
                 Toast.makeText(getApplicationContext(), "Username is already Registered or was not Entered",
                         Toast.LENGTH_LONG).show();
 
@@ -232,18 +242,19 @@ public class RequestFormCreation extends AppCompatActivity {
                 count = tracker.getInt("requestTracker", 0) + 1;
 
                 //Adding items to the bundle - output to user for SecondActivity (confirmation)
-                bundle.putString("taskname" + count, TaskName.getText().toString());
-                bundle.putString("tasklocation" + count, TaskLocation.getText().toString());
-                bundle.putString("details" + count, TaskDetails.getText().toString());
-                bundle.putString("payment" + count, TaskPayment.getText().toString());
-                bundle.putString("username" + count, UserName.getText().toString());
+                bundle.putString("taskname" + count, Sub_TaskName.getText().toString());
+                bundle.putString("tasklocation" + count, Sub_TaskLocation.getText().toString());
+                bundle.putString("details" + count, Sub_TaskDetails.getText().toString());
+                bundle.putString("payment" + count, Sub_TaskPayment.getText().toString());
+                bundle.putString("username" + count, Sub_UserName.getText().toString());
 
-                myRef.child("User").child("username" + count).setValue(UserName.getText().toString());
+                myRef.child("User").child("username" + count).setValue(Sub_UserName.getText().toString());
 
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 //Determines if the username exists
 
+                editor = tracker.edit();
 
                 ValueEventListener userListener = new ValueEventListener() {
 
@@ -251,14 +262,36 @@ public class RequestFormCreation extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         for(int i =1; dataSnapshot.child("User").child("username" + i).getValue(String.class) != null; i++)
-                        if (verify_username.equals(dataSnapshot.child("User").child("user" + i).getValue(String.class))) {
-                                username_exists = true;
+                        if (verify_username.equals(dataSnapshot.child("User").child("username" + i).getValue(String.class)) &&
+                                dataSnapshot.child("User").child("username" + i).getValue(String.class)!= null) {
+
                                 if(myRef.child("User").child("username" + count) != null) {
                                     myRef.child("User").child("username" + count).removeValue();
                                 }
 
                             }
+
+
+                        else if(dataSnapshot.child("Count").getValue(Integer.class) != null) {
+                            myRef.child("Count").setValue(dataSnapshot.child("Count").getValue(Integer.class) +1);
+                            count = dataSnapshot.child("Count").getValue(Integer.class) +1;
+                            myRef.child("TaskName").child("taskname" + count).setValue(Sub_TaskName.getText().toString());
+                            myRef.child("TaskLocation").child("tasklocation" + count).setValue(Sub_TaskLocation.getText().toString());
+                            myRef.child("Details").child("details" + count).setValue(Sub_TaskDetails.getText().toString());
+                            myRef.child("Payment").child("payment" + count).setValue(Sub_TaskPayment.getText().toString());
                         }
+
+                        else{
+                            myRef.child("Count").setValue(1);
+                            count =1;
+                            myRef.child("TaskName").child("taskname" + count).setValue(Sub_TaskName.getText().toString());
+                            myRef.child("TaskLocation").child("tasklocation" + count).setValue(Sub_TaskLocation.getText().toString());
+                            myRef.child("Details").child("details" + count).setValue(Sub_TaskDetails.getText().toString());
+                            myRef.child("Payment").child("payment" + count).setValue(Sub_TaskPayment.getText().toString());
+
+                        }
+
+                    }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -269,16 +302,12 @@ public class RequestFormCreation extends AppCompatActivity {
                 };
                 myRef.addValueEventListener(userListener);
 
-                if(username_exists) {
-                    myRef.child("TaskName").child("taskname" + count).setValue(TaskName.getText().toString());
-                    myRef.child("TaskLocation").child("tasklocation" + count).setValue(TaskLocation.getText().toString());
-                    myRef.child("Details").child("details" + count).setValue(TaskDetails.getText().toString());
-                    myRef.child("Payment").child("payment" + count).setValue(TaskPayment.getText().toString());
-                }
+                editor.putInt("requestTracker", tracker.getInt("requestTracker", 0)+1);
+                editor.putString("TaskName"+count, verify_taskName);
+                editor.putString("TaskLocation"+count, verify_taskLocation);
+                editor.putString("Details"+count, verify_taskDetails);
+                editor.putString("Payment"+count, verify_taskPayment);
 
-                SharedPreferences.Editor editor = tracker.edit();
-
-                editor.putInt("requestTracker", count);
                 editor.commit();
 
                 //Securely Store items into bundle
