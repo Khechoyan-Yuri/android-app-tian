@@ -119,9 +119,9 @@ public class MainActivity extends AppCompatActivity {
         //essentially search database & populate the page, doing this in a loop for every result
         //we can probably set this up like the ViewAdapter hw if we want more efficiency
         //but the priority right now is completion, not perfection
-<<<<<<< HEAD
+
         for(int i = 0; i < 4; i++) {//do for every task
-            if(intent.getStringExtra("taskname") != null ) {
+            if (intent.getStringExtra("taskname") != null) {
                 //get task info from database here
                 LinearLayout tasks = (LinearLayout) findViewById(R.id.LL_tasks);
                 //for (int i = 0; i < options.length; i++) { //for each of the items in the database
@@ -137,27 +137,8 @@ public class MainActivity extends AppCompatActivity {
                 //and add the task to accepted tasks
             }
 
-=======
-        for(int i = 0; i < 4; i++) {//do for every task TODO: interface with database
+        }
 
-            //get task info from database here
-            LinearLayout tasks = (LinearLayout) findViewById(R.id.LL_tasks);
-            //for (int i = 0; i < options.length; i++) { //for each of the items in the database
-            inflater = getLayoutInflater();
-            convertView = inflater.inflate(R.layout.main_task_box, null);
-            tasks.addView(convertView);
-
-            //must use convertView.findViewById to fetch dynamically, or else all edits apply to one item
-            txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
-            //txt.setId(55+1);//for some reason doesn't accept singular numbers?
-            txt.setText("Example changed title" + i);//example of changing title as we would when fetching from database
-            //We would also place an onclick method here for the buttons, which would take us to appropriate details
-            //and add the task to accepted tasks
->>>>>>> bff14599778b86d12055b878cd2c1f61f7e1f5c0
-
-            //TODO: If task is marked complete (check via database?) change its button to 'COMPLETED'
-
-        }//end for loop
 
         //essentially do the same thing for the requests
         //get task info from database here

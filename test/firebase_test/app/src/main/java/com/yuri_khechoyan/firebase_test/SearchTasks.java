@@ -37,12 +37,6 @@ public class SearchTasks extends AppCompatActivity {
 
     ArrayList<String> taskname;
 
-    ArrayList<String> taskdetails;
-
-    ArrayList<String> tasklocation;
-
-    ArrayList<String> payment;
-
     int arraylist_count;
 
     @Override
@@ -51,8 +45,6 @@ public class SearchTasks extends AppCompatActivity {
         setContentView(R.layout.activity_search_tasks);
 
         arraylist_count=-1;
-
-        taskname = new ArrayList<String>();
 
 
 
@@ -85,7 +77,8 @@ public class SearchTasks extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
+                taskname = new ArrayList<>();
+                
                 Log.d("DATABASE_USER",dataSnapshot.child("User").child("UserDetails" + 1).child("username").getValue(String.class));
 
                 Log.d("DATABASE_USER",""+dataSnapshot.child("User").child("UserDetails" + 20).child("Tasks").child("taskname"+1).getValue(String.class));
