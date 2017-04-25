@@ -74,33 +74,35 @@ public class SearchTasks extends AppCompatActivity {
 
                 for (int i = 1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
 
-                    convertView = inflater.inflate(R.layout.box, null);
-                    activity_search_tasks.addView(convertView);
+                    for(int j = 1; dataSnapshot.child("User").child("UserDetails" + i).child("taskname"+j).getValue(String.class) != null; j++) {
 
-                    TextView txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
-                    txt.setText(dataSnapshot.child("TaskName").child("taskname" + i).getValue(String.class));//example of changing title as we would when fetching from database
-                    //We would also place an onclick method here for the buttons, which would take us to appropriate details
-                    //and add the task to accepted tasks
-                    accept = (Button) convertView.findViewById(R.id.box_task_btn2);
+                        convertView = inflater.inflate(R.layout.box, null);
+                        activity_search_tasks.addView(convertView);
 
-                    details = (Button) convertView.findViewById(R.id.box_task_btn1);
+                        TextView txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
+                        txt.setText(dataSnapshot.child("User").child("UserDetails"+i).child("taskname" + j).getValue(String.class));//example of changing title as we would when fetching from database
+                        //We would also place an onclick method here for the buttons, which would take us to appropriate details
+                        //and add the task to accepted tasks
+                        accept = (Button) convertView.findViewById(R.id.box_task_btn2);
 
-                    accept.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        details = (Button) convertView.findViewById(R.id.box_task_btn1);
 
-                            startActivity(intent);
-                        }
-                    });
+                        accept.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
-                    details.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                                startActivity(intent);
+                            }
+                         });
 
-                        }
-                    });
+                        details.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
+                            }
+                        });
+                    }
                 }
 
             }

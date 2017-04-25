@@ -97,9 +97,8 @@ public class MainActivity extends AppCompatActivity {
         //Get preferences to see if a username exists
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
-       // String uname = pref.getString("username", "");
+        String uname = pref.getString("username", "");
 
-        String uname = "";
         Log.d("uname", uname);
         if(uname.equals("")){
             //if the username isn't available, take to account creation

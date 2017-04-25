@@ -27,7 +27,9 @@ import java.util.ArrayList;
 
 public class RequestFormCreation extends AppCompatActivity {
 
-    int count;
+    int user_count;
+
+    int task_count;
 
     boolean U_confirm_submission;
 
@@ -117,7 +119,6 @@ public class RequestFormCreation extends AppCompatActivity {
 
         //Initializes and extracts Values to store into a bundle
         //for moving data to another activity
-        Sub_UserName = (EditText) findViewById(R.id.et_UserName);
         Sub_TaskName = (EditText) findViewById(R.id.et_TaskName);
         Sub_TaskDetails = (EditText) findViewById(R.id.et_Details);
         Sub_TaskLocation = (EditText) findViewById(R.id.et_Location);
@@ -125,7 +126,6 @@ public class RequestFormCreation extends AppCompatActivity {
 
 
         //Receive Text input from user, converting toString()
-        verify_username = Sub_UserName.getText().toString();
         String verify_taskName = Sub_TaskName.getText().toString();
         String verify_taskDetails = Sub_TaskDetails.getText().toString();
         String verify_taskLocation = Sub_TaskLocation.getText().toString();
@@ -255,28 +255,25 @@ public class RequestFormCreation extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        int i;
-                        for( i =1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
-                            if (verify_username.equals(dataSnapshot.child("User").child("username" + i).getValue(String.class)) &&
+                        for( int i =1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
+                            if ( tracker.getString("username", null).equals(dataSnapshot.child("User").child("username" + i).getValue(String.class)) &&
                                     dataSnapshot.child("User").child("username" + i).getValue(String.class) != null) {
 
-                                Sub_UserName.setText("");
-
-                                username_exists = true;
+                                user_count = i;
                             }
 
                         }
 
+                        for(int i = 1; dataSnapshot.child("User").child("UserDetails" + user_count).child("taskname"+i).getValue(String.class) != null; i++) {
+                            task_count = i;
+                        }
+
                         if (username_exists == false) {
 
-                            count = i;
-
-                            Log.d("COUNT", ""+i);
-                            myRef.child("User").child("UserDetails"+count).child("username").setValue(Sub_UserName.getText().toString());
-                            myRef.child("TaskName").child("taskname" + count).setValue(Sub_TaskName.getText().toString());
-                            myRef.child("TaskLocation").child("tasklocation" + count).setValue(Sub_TaskLocation.getText().toString());
-                            myRef.child("Details").child("details" + count).setValue(Sub_TaskDetails.getText().toString());
-                            myRef.child("Payment").child("payment" + count).setValue(Sub_TaskPayment.getText().toString());
+                            myRef.child("User").child("UserDetails"+user_count).child("Tasks").child("taskname" + task_count).setValue(Sub_TaskName.getText().toString());
+                            myRef.child("User").child("UserDetails"+user_count).child("Tasks").child("tasklocation" + task_count).setValue(Sub_TaskLocation.getText().toString());
+                            myRef.child("User").child("UserDetails"+user_count).child("Tasks").child("details" + task_count).setValue(Sub_TaskDetails.getText().toString());
+                            myRef.child("User").child("UserDetails"+user_count).child("Tasks").child("payment" + task_count).setValue(Sub_TaskPayment.getText().toString());
                         }
 
                     }
