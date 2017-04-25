@@ -121,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         //but the priority right now is completion, not perfection
 
         for(int i = 0; i < 4; i++) {//do for every task
-            if (intent.getStringExtra("taskname") != null) {
                 //get task info from database here
                 LinearLayout tasks = (LinearLayout) findViewById(R.id.LL_tasks);
                 //for (int i = 0; i < options.length; i++) { //for each of the items in the database
@@ -132,10 +131,9 @@ public class MainActivity extends AppCompatActivity {
                 //must use convertView.findViewById to fetch dynamically, or else all edits apply to one item
                 txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
                 //txt.setId(55+1);//for some reason doesn't accept singular numbers?
-                txt.setText(intent.getStringExtra("taskname"));//example of changing title as we would when fetching from database
+                txt.setText("Example Task" +i);//example of changing title as we would when fetching from database
                 //We would also place an onclick method here for the buttons, which would take us to appropriate details
                 //and add the task to accepted tasks
-            }
 
         }
 
