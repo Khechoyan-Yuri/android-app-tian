@@ -72,9 +72,11 @@ public class SearchTasks extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), dataSnapshot.child("User").child("UserDetails" + 1).child("username").getValue(String.class), Toast.LENGTH_LONG).show();
 
-                for (int i = 1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
+                for (int i = 1; dataSnapshot.child("User").child("UserDetails" + i) != null; i++) {
 
                     for(int j = 1; dataSnapshot.child("User").child("UserDetails" + i).child("taskname"+j).getValue(String.class) != null; j++) {
+
+                        Log.d("USER_DETAILS", dataSnapshot.child("User").child("UserDetails" + i).child("taskname"+j).getValue(String.class));
 
                         convertView = inflater.inflate(R.layout.box, null);
                         activity_search_tasks.addView(convertView);
@@ -116,7 +118,7 @@ public class SearchTasks extends AppCompatActivity {
 
         };
 
-        myRef.addListenerForSingleValueEvent(userListener);
+        myRef.addValueEventListener(userListener);
     }
 
     public void DetailsLook(View v) {

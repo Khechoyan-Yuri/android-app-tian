@@ -233,8 +233,8 @@ public class RequestFormCreation extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         for( int i =1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
-                            if ( tracker.getString("username", null).equals(dataSnapshot.child("User").child("username" + i).getValue(String.class)) &&
-                                    dataSnapshot.child("User").child("username" + i).getValue(String.class) != null) {
+                            if ( tracker.getString("username", null).equals(dataSnapshot.child("User").child("UserDetails"+i).child("username").getValue(String.class)) &&
+                                    dataSnapshot.child("User").child("UserDetails"+i).child("username").getValue(String.class) != null) {
 
                                 user_count = i;
                             }
