@@ -151,14 +151,6 @@ public class RequestFormCreation extends AppCompatActivity {
             name_Username.add(convertArray.getString(i));
         }
 
-        //Verifying if Username is empty or not | UN = Username Entry
-        if (verify_username.equals("")) {
-            Toast.makeText(this, "Username was not Entered", Toast.LENGTH_SHORT).show();
-            UN_confirm_submission = false;
-        } else {
-            UN_confirm_submission = true;
-        }
-
         //Verifying if Task Name is empty or not | TN = Task Name Entry
         if (verify_taskName.equals("")) {
             Toast.makeText(this, "Task Name was not Entered", Toast.LENGTH_SHORT).show();
@@ -211,24 +203,9 @@ public class RequestFormCreation extends AppCompatActivity {
         username_exists = false;
 
 
-        //Verifying that Username DOES NOT exist in database (string.xml file)
-        //If username already exists, clear field & ask user to register a different username
-        //If ArrayList contains pre-existing UserName (List matches user input) - throw toast
-        //U = UserName
-            if (name_Username.contains(verify_username.toString().trim()) || verify_username.toString().equals("")
-                    || username_exists == true) {
-
-                Sub_UserName.setText("");
-                Toast.makeText(getApplicationContext(), "Username is already Registered or was not Entered",
-                        Toast.LENGTH_LONG).show();
-
-                U_confirm_submission = false;
-            } else {
-                U_confirm_submission = true;
-            }
 
             //Create OVERALL Verification Boolean
-            boolean final_confirm_submission = UN_confirm_submission && TN_confirm_submission &&
+            boolean final_confirm_submission = TN_confirm_submission &&
                     TD_confirm_submission && TL_confirm_submission && TP_confirm_submission;
 
             if (final_confirm_submission == false) {
