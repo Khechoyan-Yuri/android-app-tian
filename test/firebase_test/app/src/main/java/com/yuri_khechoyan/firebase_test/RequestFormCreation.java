@@ -256,7 +256,7 @@ public class RequestFormCreation extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         int i;
-                        for( i =1; dataSnapshot.child("User").child("username" + i).getValue(String.class) != null; i++) {
+                        for( i =1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
                             if (verify_username.equals(dataSnapshot.child("User").child("username" + i).getValue(String.class)) &&
                                     dataSnapshot.child("User").child("username" + i).getValue(String.class) != null) {
 
@@ -272,7 +272,7 @@ public class RequestFormCreation extends AppCompatActivity {
                             count = i;
 
                             Log.d("COUNT", ""+i);
-                            myRef.child("User").child("username"+count).setValue(Sub_UserName.getText().toString());
+                            myRef.child("User").child("UserDetails"+count).child("username").setValue(Sub_UserName.getText().toString());
                             myRef.child("TaskName").child("taskname" + count).setValue(Sub_TaskName.getText().toString());
                             myRef.child("TaskLocation").child("tasklocation" + count).setValue(Sub_TaskLocation.getText().toString());
                             myRef.child("Details").child("details" + count).setValue(Sub_TaskDetails.getText().toString());

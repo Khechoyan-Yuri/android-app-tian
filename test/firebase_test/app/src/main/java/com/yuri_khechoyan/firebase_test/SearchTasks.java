@@ -70,9 +70,9 @@ public class SearchTasks extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                Toast.makeText(getApplicationContext(), dataSnapshot.child("User").child("username" + 1).getValue(String.class), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), dataSnapshot.child("User").child("UserDetails" + 1).child("username").getValue(String.class), Toast.LENGTH_LONG).show();
 
-                for (int i = 1; dataSnapshot.child("User").child("username" + i).getValue(String.class) != null; i++) {
+                for (int i = 1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
 
                     convertView = inflater.inflate(R.layout.box, null);
                     activity_search_tasks.addView(convertView);
