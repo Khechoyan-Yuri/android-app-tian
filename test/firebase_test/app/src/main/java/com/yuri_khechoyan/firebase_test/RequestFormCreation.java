@@ -270,6 +270,8 @@ public class RequestFormCreation extends AppCompatActivity {
                         if (username_exists == false) {
 
                             count = i;
+
+                            Log.d("COUNT", ""+i);
                             myRef.child("User").child("username"+count).setValue(Sub_UserName.getText().toString());
                             myRef.child("TaskName").child("taskname" + count).setValue(Sub_TaskName.getText().toString());
                             myRef.child("TaskLocation").child("tasklocation" + count).setValue(Sub_TaskLocation.getText().toString());
