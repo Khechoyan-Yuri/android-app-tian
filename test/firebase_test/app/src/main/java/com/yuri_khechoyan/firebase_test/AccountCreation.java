@@ -106,6 +106,7 @@ public class AccountCreation extends AppCompatActivity {
             //first put the username into shared preferences
             prefs.edit().remove("username");
             prefs.edit().putString("username", username.getText().toString()).apply();
+            prefs.edit().commit();
 
             //then go ahead and take us to the main menu
             Intent i = new Intent(getApplicationContext(), MainActivity.class);

@@ -232,21 +232,37 @@ public class RequestFormCreation extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        for( int i =1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
-                            if ( tracker.getString("username", null).equals(dataSnapshot.child("User").child("UserDetails"+i).child("username").getValue(String.class)) &&
-                                    dataSnapshot.child("User").child("UserDetails"+i).child("username").getValue(String.class) != null) {
+                        if(dataSnapshot.child("User").child("UserDetails" + 1).child("username").getValue(String.class).equals(tracker.getString("username", null))) {
+
+                            user_count =1;
+                        }
+
+                        else {
+                            for( int i =1; !(dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class).equals(tracker.getString("username", null))); i++) {
+
+                                Log.d("MEM_USERNAME", tracker.getString("username", "Null"));
+                                Log.d("DATABASE_USERNAME", dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class));
 
                                 user_count = i;
+
                             }
 
                         }
 
-                        for(int i = 1; dataSnapshot.child("User").child("UserDetails" + user_count).child("taskname"+i).getValue(String.class) != null; i++) {
-                            task_count = i;
+                        if(dataSnapshot.child("User").child("UserDetails" + user_count).child("Tasks").child("taskname"+1).getValue(String.class) == null) {
+                            task_count = 1;
                         }
+                        else {
+                            for(int i = 1; dataSnapshot.child("User").child("UserDetails" + user_count).child("Tasks").child("taskname"+i).getValue(String.class) != null; i++) {
+                                task_count = i;
+                            }
+                        }
+
 
                         if (username_exists == false) {
 
+                            Log.d("TASK", Integer.toString(task_count));
+                            Log.d("USERCOUNT", Integer.toString(user_count));
                             myRef.child("User").child("UserDetails"+user_count).child("Tasks").child("taskname" + task_count).setValue(Sub_TaskName.getText().toString());
                             myRef.child("User").child("UserDetails"+user_count).child("Tasks").child("tasklocation" + task_count).setValue(Sub_TaskLocation.getText().toString());
                             myRef.child("User").child("UserDetails"+user_count).child("Tasks").child("details" + task_count).setValue(Sub_TaskDetails.getText().toString());

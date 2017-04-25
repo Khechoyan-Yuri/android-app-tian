@@ -70,19 +70,22 @@ public class SearchTasks extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                Toast.makeText(getApplicationContext(), dataSnapshot.child("User").child("UserDetails" + 1).child("username").getValue(String.class), Toast.LENGTH_LONG).show();
+                Log.d("DATABASE_USER",dataSnapshot.child("User").child("UserDetails" + 1).child("username").getValue(String.class));
 
-                for (int i = 1; dataSnapshot.child("User").child("UserDetails" + i) != null; i++) {
+                Log.d("DATABASE_USER",""+dataSnapshot.child("User").child("UserDetails" + 1).child("Tasks").child("taskname"+1).getValue(String.class));
 
-                    for(int j = 1; dataSnapshot.child("User").child("UserDetails" + i).child("taskname"+j).getValue(String.class) != null; j++) {
 
-                        Log.d("USER_DETAILS", dataSnapshot.child("User").child("UserDetails" + i).child("taskname"+j).getValue(String.class));
+                //for (int i = 1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
+
+                   for(int j = 1; dataSnapshot.child("User").child("UserDetails" + 1).child("Tasks").child("taskname"+j).getValue(String.class) != null; j++) {
+
+                        //Log.d("USER_DETAILS", dataSnapshot.child("User").child("UserDetails" + i).child("Tasks").child("taskname"+j).getValue(String.class));
 
                         convertView = inflater.inflate(R.layout.box, null);
                         activity_search_tasks.addView(convertView);
 
                         TextView txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
-                        txt.setText(dataSnapshot.child("User").child("UserDetails"+i).child("taskname" + j).getValue(String.class));//example of changing title as we would when fetching from database
+                        txt.setText(dataSnapshot.child("User").child("UserDetails"+1).child("Tasks").child("taskname"+j).getValue(String.class));//example of changing title as we would when fetching from database
                         //We would also place an onclick method here for the buttons, which would take us to appropriate details
                         //and add the task to accepted tasks
                         accept = (Button) convertView.findViewById(R.id.box_task_btn2);
@@ -107,7 +110,7 @@ public class SearchTasks extends AppCompatActivity {
                     }
                 }
 
-            }
+            //}
 
             @Override
             public void onCancelled (DatabaseError databaseError){
