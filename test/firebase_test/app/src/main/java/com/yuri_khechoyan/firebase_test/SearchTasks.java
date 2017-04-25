@@ -78,7 +78,7 @@ public class SearchTasks extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 taskname = new ArrayList<>();
-                
+
                 Log.d("DATABASE_USER",dataSnapshot.child("User").child("UserDetails" + 1).child("username").getValue(String.class));
 
                 Log.d("DATABASE_USER",""+dataSnapshot.child("User").child("UserDetails" + 20).child("Tasks").child("taskname"+1).getValue(String.class));
@@ -106,16 +106,12 @@ public class SearchTasks extends AppCompatActivity {
 
                         details = (Button) convertView.findViewById(R.id.box_task_btn1);
 
-                        taskname.add(dataSnapshot.child("User").child("UserDetails"+i).child("Tasks").child("taskname"+j).getValue(String.class));
-
 
                         //if accepted, accept and go to main
                        accept.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-
-                                intent.putExtra("taskname",taskname.get(arraylist_count));
 
                                 intent.putExtra("arraylist_count", arraylist_count);
 
