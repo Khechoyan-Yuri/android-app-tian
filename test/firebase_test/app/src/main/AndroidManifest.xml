@@ -23,7 +23,7 @@
         <activity android:name=".DataBase" />
         <activity android:name=".SearchTasks" />
         <activity android:name=".Completed" />
-        <activity android:name=".AccountCreation"></activity>
+        <activity android:name=".AccountCreation"/>
     </application>
 
 </manifest>

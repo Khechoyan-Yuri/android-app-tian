@@ -5,6 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <!--layout to hold-->
     <RelativeLayout
         android:layout_centerHorizontal="true"
         android:id="@+id/box_task_layout"
@@ -14,6 +15,7 @@
         android:layout_marginTop="20dp"
         android:background="#8ed2d9">
 
+        <!--task title-->
         <TextView
             android:id="@+id/box_subtitle1"
             android:layout_centerHorizontal="true"
@@ -21,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="Nothing Right Now"/>
 
-
+        <!--status button-->
         <Button
             android:id="@+id/request_btn1text"
             android:layout_below="@id/box_subtitle1"
@@ -29,6 +31,8 @@
             android:layout_height="wrap_content"
             android:text="Not Accepted"
             android:textSize="10dp" />
+
+        <!--secondary button, possible use for editing-->
         <Button
             android:id="@+id/request_btn2text"
             android:layout_below="@id/box_subtitle1"

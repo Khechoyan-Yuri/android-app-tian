@@ -31,21 +31,11 @@ public class RequestFormCreation extends AppCompatActivity {
 
     int task_count;
 
-    boolean U_confirm_submission;
-
     SharedPreferences tracker;
 
     DatabaseReference myRef;
 
-    DatabaseReference testRef;
-
     boolean username_exists;
-
-    EditText name_Username;
-
-    String verify_username;
-
-    EditText Sub_UserName;
 
     EditText Sub_TaskName;
 
@@ -85,6 +75,8 @@ public class RequestFormCreation extends AppCompatActivity {
     public void CancelRequest(View v) {
         //Initializes and extracts Values to store into a bundle
         //for moving data to another activity
+
+        //get access to the ETs
         EditText UserName = (EditText) findViewById(R.id.et_UserName);
         EditText TaskName = (EditText) findViewById(R.id.et_TaskName);
         EditText TaskDetails = (EditText) findViewById(R.id.et_Details);
@@ -119,6 +111,8 @@ public class RequestFormCreation extends AppCompatActivity {
 
         //Initializes and extracts Values to store into a bundle
         //for moving data to another activity
+
+        //get ETs
         Sub_TaskName = (EditText) findViewById(R.id.et_TaskName);
         Sub_TaskDetails = (EditText) findViewById(R.id.et_Details);
         Sub_TaskLocation = (EditText) findViewById(R.id.et_Location);
@@ -133,7 +127,6 @@ public class RequestFormCreation extends AppCompatActivity {
 
         //These booleans will be used to help identify if application
         //can move onto the 2nd Activity
-        boolean UN_confirm_submission;
         boolean TN_confirm_submission;
         boolean TD_confirm_submission;
         boolean TL_confirm_submission;
@@ -180,6 +173,7 @@ public class RequestFormCreation extends AppCompatActivity {
             Toast.makeText(this, "Task Payment was not Entered", Toast.LENGTH_SHORT).show();
             TP_confirm_submission = false;
         } else if (Float.parseFloat(verify_taskPayment) < 5) {
+            //minimum payment is $5, don't allow less
             Toast.makeText(this, "Minimum payment is $5", Toast.LENGTH_SHORT).show();
             TP_confirm_submission = false;
         } else {
@@ -204,9 +198,11 @@ public class RequestFormCreation extends AppCompatActivity {
 
 
 
+
             //Create OVERALL Verification Boolean
             boolean final_confirm_submission = TN_confirm_submission &&
                     TD_confirm_submission && TL_confirm_submission && TP_confirm_submission;
+
 
             if (final_confirm_submission == false) {
             } else {
@@ -270,9 +266,9 @@ public class RequestFormCreation extends AppCompatActivity {
                             myRef.child("User").child("UserDetails"+user_count).child("Tasks").child("tasklocation" + task_count).setValue(Sub_TaskLocation.getText().toString());
                             myRef.child("User").child("UserDetails"+user_count).child("Tasks").child("details" + task_count).setValue(Sub_TaskDetails.getText().toString());
                             myRef.child("User").child("UserDetails"+user_count).child("Tasks").child("payment" + task_count).setValue(Sub_TaskPayment.getText().toString());
-                        }
+                        }//end if username_exists
 
-                    }
+                    }//end onDataChanged
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -281,13 +277,15 @@ public class RequestFormCreation extends AppCompatActivity {
                         // ...
                     }
                 };
+
+
                 myRef.addListenerForSingleValueEvent(userListener);
 
                 if(username_exists) {
                     Toast.makeText(getApplicationContext(), "Please enter a new name", Toast.LENGTH_LONG);
                 }
 
-                else {
+                else {//if everything works, put everything into preferences(?)
                     editor.putInt("requestTracker", tracker.getInt("requestTracker", 0)+1);
                     editor.putString("TaskName"+tracker.getInt("requestTracker", 0)+1, verify_taskName);
                     editor.putString("TaskLocation"+tracker.getInt("requestTracker", 0)+1, verify_taskLocation);
@@ -299,8 +297,9 @@ public class RequestFormCreation extends AppCompatActivity {
                     //Securely Store items into bundle
                     intent.putExtras(bundle);
                     //Start the Activity
-                    startActivity(intent);
-                }
-            }
-        }
-}
+                    startActivity(intent);//go to Main
+
+                }//end else
+            }//end if final_confirm_submission
+        }//end Submit
+}//end class

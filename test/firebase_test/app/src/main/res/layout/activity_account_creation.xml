@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yuri_khechoyan.firebase_test.AccountCreation">
+
+    <!--dheader for the name, replace with logo?-->
     <TextView
         android:id="@+id/acct_header"
         android:layout_centerHorizontal="true"
@@ -14,17 +16,20 @@
         android:textSize="40dp"
         android:textColor="#8ed2d9"/>
 
+
+    <!--scrillview in case info gets long and/or keyboard covers things-->
     <ScrollView
         android:id="@+id/acct_scroll"
         android:layout_below="@id/acct_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!--relative layout to hold our content-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
+            <!--basic welcome message. information/warnings about attempted creation will appear here-->
             <TextView
                 android:id="@+id/welcome"
                 android:text="Welcome to DunDeal, where your life gets easier. Please create an account or login below."
@@ -77,6 +82,7 @@
                 android:ems="10"
                 android:inputType="textPassword" />
 
+            <!-- PASSWORD2 TextViews & EditText-->
             <TextView
                 android:id="@+id/tv_Password2"
                 android:layout_below="@id/tv_Password"
@@ -113,8 +119,6 @@
 
 
     </ScrollView>
-
-
 
 
 </RelativeLayout>

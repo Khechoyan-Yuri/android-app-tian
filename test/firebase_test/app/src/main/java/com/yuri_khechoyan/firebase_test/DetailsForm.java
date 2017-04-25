@@ -13,6 +13,7 @@ public class DetailsForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_form);
 
+        //get content from XML
         TextView username = (TextView) findViewById(R.id.UserName);
         TextView taskname = (TextView) findViewById(R.id.TaskName);
         TextView details = (TextView) findViewById(R.id.Details);
@@ -52,13 +53,14 @@ public class DetailsForm extends AppCompatActivity {
         if(intent.hasExtra("completion")){//TODO: might be able to replace this with a database check?
             if(intent.getBooleanExtra("completion", false)){
                 completion.setText("You have marked this task complete. The requester will be asked" +
-                        " to confirm, then your pay will be trasnfered. Please contact an administrator" +
+                        " to confirm, then your pay will be transfered. Please contact an administrator" +
                         " if your payment isn't transferred within two days.");
-                //TODO: replace 'the requester' with the username of the requester (get from database)
+                //TODO: replace 'the requester' with the username of the requester (get from database)?
             }
         }
     }
 
+    //if Main is back, then
     public void GoBack(View v) {
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
         Intent intent = getIntent();
@@ -70,4 +72,17 @@ public class DetailsForm extends AppCompatActivity {
 
         startActivity(i);
     }
-}
+
+    public void onBackPressed() {//deal with backbutton
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("source")) {
+            if(intent.getStringExtra("source").equals("search")){
+                i = new Intent(getApplicationContext(), SearchTasks.class);
+            } //basically check and see our source and try to return to that
+        }
+
+        startActivity(i);
+    }//end onBackPressed
+}//end class

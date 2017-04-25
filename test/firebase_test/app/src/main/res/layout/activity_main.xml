@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yuri_khechoyan.firebase_test.MainActivity">
+
+    <!--Text view for task header-->
     <TextView
         android:id="@+id/task_header"
         android:layout_centerHorizontal="true"
@@ -14,6 +16,7 @@
         android:textSize="40dp"
         android:textColor="#8ed2d9"/>
 
+    <!--Scroll view to hold tasks-->
     <ScrollView
         android:id="@+id/task_scroll"
         android:layout_below="@id/task_header"
@@ -36,6 +39,7 @@
 
             </LinearLayout>
 
+            <!--Button to search for tasks-->
             <Button
                 android:id="@+id/btn_search_tasks"
                 android:layout_height="wrap_content"
@@ -49,6 +53,7 @@
         </LinearLayout>
     </ScrollView>
 
+    <!--Header for requests-->
     <TextView
         android:id="@+id/request_header"
         android:layout_width="wrap_content"
@@ -81,6 +86,7 @@
 
             </LinearLayout>
 
+            <!--Button to make a request-->
             <Button
                 android:id="@+id/btn_make_request"
                 android:layout_height="wrap_content"
@@ -94,7 +100,6 @@
         </LinearLayout>
 
     </ScrollView>
-
 
 
 </RelativeLayout>
