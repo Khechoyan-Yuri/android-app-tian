@@ -35,10 +35,29 @@ public class SearchTasks extends AppCompatActivity {
 
     Button details;
 
+    ArrayList<String> username;
+
+    ArrayList<String> taskname;
+
+    ArrayList<String> taskdetails;
+
+    ArrayList<String> tasklocation;
+
+    ArrayList<String> payment;
+
+    int arraylist_count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_tasks);
+
+        arraylist_count=-1;
+
+        taskname = new ArrayList<String>();
+        taskdetails = new ArrayList<String>();
+        tasklocation = new ArrayList<String>();
+        payment = new ArrayList<String>();
 
 
         //essentially search database & populate the page, doing this in a loop for every result
@@ -81,6 +100,8 @@ public class SearchTasks extends AppCompatActivity {
 
                         //Log.d("USER_DETAILS", dataSnapshot.child("User").child("UserDetails" + i).child("Tasks").child("taskname"+j).getValue(String.class));
 
+                       arraylist_count++;
+
                         convertView = inflater.inflate(R.layout.box, null);
                         activity_search_tasks.addView(convertView);
 
@@ -92,10 +113,24 @@ public class SearchTasks extends AppCompatActivity {
 
                         details = (Button) convertView.findViewById(R.id.box_task_btn1);
 
-                        accept.setOnClickListener(new View.OnClickListener() {
+                        username.add(dataSnapshot.child("User").child("UserDetails"+i).child("username").getValue(String.class));
+
+                       taskname.add(dataSnapshot.child("User").child("UserDetails"+i).child("Tasks").child("taskname"+j).getValue(String.class));
+                       taskdetails.add(dataSnapshot.child("User").child("UserDetails"+i).child("Tasks").child("details"+j).getValue(String.class));
+                       tasklocation.add(dataSnapshot.child("User").child("UserDetails"+i).child("Tasks").child("tasklocation"+j).getValue(String.class));
+                       payment.add(dataSnapshot.child("User").child("UserDetails"+i).child("Tasks").child("payment"+j).getValue(String.class));
+
+
+
+                       accept.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                                intent.putExtra("taskname",taskname.get(arraylist_count));
+                                intent.putExtra("taskdetails",taskdetails.get(arraylist_count));
+                                intent.putExtra("tasklocation",tasklocation.get(arraylist_count));
+                                intent.putExtra("payment",payment.get(arraylist_count));
 
                                 startActivity(intent);
                             }
