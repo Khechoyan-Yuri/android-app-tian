@@ -20,7 +20,8 @@
         <activity android:name=".DetailsForm" />
         <activity android:name=".DataBase" />
         <activity android:name=".SearchTasks" />
-        <activity android:name=".Completed"></activity>
+        <activity android:name=".Completed" />
+        <activity android:name=".AccountCreation"></activity>
     </application>
 
 </manifest>

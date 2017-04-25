@@ -72,6 +72,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -93,8 +94,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //used to keep track of what request number we are on
+        //Get preferences to see if a username exists
         pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String uname = pref.getString("username", "");
+        Log.d("uname", uname);
+        if(uname.equals("")){
+            //if the username isn't available, take to account creation
+            Intent i = new Intent(getApplicationContext(), AccountCreation.class);
+
+            startActivity(i);
+        }
+        //We start in MainActivity instead of account creation because users will usually
+        //have usernames saved, so this means less swapping
 
         CreateText();
 
@@ -231,8 +243,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        SharedPreferences.Editor editor = pref.edit();
-        editor.clear();
-        editor.commit();
     }
 }
