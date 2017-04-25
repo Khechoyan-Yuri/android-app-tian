@@ -53,6 +53,8 @@ public class RequestFormCreation extends AppCompatActivity {
 
     SharedPreferences.Editor editor;
 
+    Bundle bundle;
+
 
 
     @Override
@@ -235,18 +237,11 @@ public class RequestFormCreation extends AppCompatActivity {
                 //onClick() method is called
                 //Initializes Intent and bundle for moving data from one activity to another
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                Bundle bundle = new Bundle();
+                bundle = new Bundle();
 
                 tracker = PreferenceManager.getDefaultSharedPreferences(this);
 
                 count = tracker.getInt("requestTracker", 0) + 1;
-
-                //Adding items to the bundle - output to user for SecondActivity (confirmation)
-                bundle.putString("taskname" + count, Sub_TaskName.getText().toString());
-                bundle.putString("tasklocation" + count, Sub_TaskLocation.getText().toString());
-                bundle.putString("details" + count, Sub_TaskDetails.getText().toString());
-                bundle.putString("payment" + count, Sub_TaskPayment.getText().toString());
-                bundle.putString("username" + count, Sub_UserName.getText().toString());
 
                 myRef.child("User").child("username" + count).setValue(Sub_UserName.getText().toString());
 
@@ -273,6 +268,14 @@ public class RequestFormCreation extends AppCompatActivity {
 
 
                         else if(dataSnapshot.child("Count").getValue(Integer.class) != null) {
+
+                            //Adding items to the bundle - output to user for SecondActivity (confirmation)
+                            bundle.putString("taskname" + count, Sub_TaskName.getText().toString());
+                            bundle.putString("tasklocation" + count, Sub_TaskLocation.getText().toString());
+                            bundle.putString("details" + count, Sub_TaskDetails.getText().toString());
+                            bundle.putString("payment" + count, Sub_TaskPayment.getText().toString());
+                            bundle.putString("username" + count, Sub_UserName.getText().toString());
+
                             myRef.child("Count").setValue(dataSnapshot.child("Count").getValue(Integer.class) +1);
                             count = dataSnapshot.child("Count").getValue(Integer.class) +1;
                             myRef.child("TaskName").child("taskname" + count).setValue(Sub_TaskName.getText().toString());
@@ -282,6 +285,14 @@ public class RequestFormCreation extends AppCompatActivity {
                         }
 
                         else{
+
+                            //Adding items to the bundle - output to user for SecondActivity (confirmation)
+                            bundle.putString("taskname" + count, Sub_TaskName.getText().toString());
+                            bundle.putString("tasklocation" + count, Sub_TaskLocation.getText().toString());
+                            bundle.putString("details" + count, Sub_TaskDetails.getText().toString());
+                            bundle.putString("payment" + count, Sub_TaskPayment.getText().toString());
+                            bundle.putString("username" + count, Sub_UserName.getText().toString());
+
                             myRef.child("Count").setValue(1);
                             count =1;
                             myRef.child("TaskName").child("taskname" + count).setValue(Sub_TaskName.getText().toString());
