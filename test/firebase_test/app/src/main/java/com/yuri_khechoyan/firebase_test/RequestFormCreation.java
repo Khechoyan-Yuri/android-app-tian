@@ -250,10 +250,13 @@ public class RequestFormCreation extends AppCompatActivity {
                         }
 
                         if(dataSnapshot.child("User").child("UserDetails" + user_count).child("Tasks").child("taskname"+1).getValue(String.class) == null) {
+
                             task_count = 1;
                         }
                         else {
-                            for(int i = 1; dataSnapshot.child("User").child("UserDetails" + user_count).child("Tasks").child("taskname"+i).getValue(String.class) != null; i++) {
+                            int i =1;
+                            while(dataSnapshot.child("User").child("UserDetails" + user_count).child("Tasks").child("taskname"+i).getValue(String.class) != null) {
+                                i++;
                                 task_count = i;
                             }
                         }
@@ -278,7 +281,7 @@ public class RequestFormCreation extends AppCompatActivity {
                         // ...
                     }
                 };
-                myRef.addValueEventListener(userListener);
+                myRef.addListenerForSingleValueEvent(userListener);
 
                 if(username_exists) {
                     Toast.makeText(getApplicationContext(), "Please enter a new name", Toast.LENGTH_LONG);
