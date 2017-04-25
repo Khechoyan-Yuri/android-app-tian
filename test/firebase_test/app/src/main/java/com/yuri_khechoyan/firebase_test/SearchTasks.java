@@ -79,6 +79,7 @@ public class SearchTasks extends AppCompatActivity {
             }
         });*/
 
+        //access messages part of database
         myRef = FirebaseDatabase.getInstance().getReference("message");
 
         myRef.child("Dummy").setValue("");
@@ -93,18 +94,21 @@ public class SearchTasks extends AppCompatActivity {
 
                 Log.d("DATABASE_USER",""+dataSnapshot.child("User").child("UserDetails" + 20).child("Tasks").child("taskname"+1).getValue(String.class));
 
-
+                //for all users
                 for (int i = 1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
 
+                    //for all tasks that the user has
                    for(int j = 1; dataSnapshot.child("User").child("UserDetails" + i).child("Tasks").child("taskname"+j).getValue(String.class) != null; j++) {
 
                         //Log.d("USER_DETAILS", dataSnapshot.child("User").child("UserDetails" + i).child("Tasks").child("taskname"+j).getValue(String.class));
 
                        arraylist_count++;
 
+                        //inflate the box
                         convertView = inflater.inflate(R.layout.box, null);
                         activity_search_tasks.addView(convertView);
 
+                       //set title as task title
                         TextView txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
                         txt.setText(dataSnapshot.child("User").child("UserDetails"+i).child("Tasks").child("taskname"+j).getValue(String.class));//example of changing title as we would when fetching from database
                         //We would also place an onclick method here for the buttons, which would take us to appropriate details
@@ -121,7 +125,7 @@ public class SearchTasks extends AppCompatActivity {
                        payment.add(dataSnapshot.child("User").child("UserDetails"+i).child("Tasks").child("payment"+j).getValue(String.class));
 
 
-
+                        //if accepted, accept and go to main
                        accept.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -139,13 +143,13 @@ public class SearchTasks extends AppCompatActivity {
                         details.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+                                //TODO: interface with database
                             }
                         });
-                    }
-                }
+                    }//end tasks
+                }//end users
 
-            }
+            }//end onDataChange
 
             @Override
             public void onCancelled (DatabaseError databaseError){
@@ -154,21 +158,28 @@ public class SearchTasks extends AppCompatActivity {
                 // ...
             }
 
-        };
+        }; //end event listener
 
         myRef.addValueEventListener(userListener);
-    }
+    }//end onCreate
 
+    //default details onClick
     public void DetailsLook(View v) {
+        //go to details
         Intent i = new Intent(getApplicationContext(), DetailsForm.class);
+        
+        //but tell it we're on the search page, so back functionality works properly
         i.putExtra("source", "search");
         startActivity(i);
-    }
+    }//end DetailsLooks
 
-
+    
+    //function for back button within layout
     public void GoBack(View v) {
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
 
         startActivity(i);
-    }
-}
+    }//end goBack
+    
+   
+}//end class

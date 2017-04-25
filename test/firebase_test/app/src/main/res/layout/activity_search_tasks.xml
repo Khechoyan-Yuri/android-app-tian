@@ -8,6 +8,7 @@
     android:id="@+id/ST_Layout"
     tools:context="com.yuri_khechoyan.firebase_test.SearchTasks">
 
+    <!--ScrollView will hold tasks-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -20,50 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <!--example button. Will likely remove when database is ready, so we don't show false tasks-->
-        <RelativeLayout
-            android:layout_below="@id/task_header"
-            android:layout_gravity="center"
-            android:id="@+id/task_layout"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:background="#8ed2d9">
-
-            <TextView
-                android:id="@+id/subtitle1"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nothing Right Now"/>
-
-
-            <Button
-                android:id="@+id/task_btn1"
-                android:layout_below="@id/subtitle1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Details"
-                android:textSize="10dp"
-                android:onClick="DetailsLook"/>
-
-
-            <Button
-                android:id="@+id/task_btn2"
-                android:layout_below="@id/subtitle1"
-                android:layout_toRightOf="@id/task_btn1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Accept"
-                android:textSize="15dp"/>
-
-
-        </RelativeLayout>
+        <!--Tasks appear here-->
 
     </LinearLayout>
-        <!-- Two relative layouts because the inner one is the box and ScrollView can only hold one-->
 
     </ScrollView>
 

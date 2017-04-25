@@ -23,8 +23,6 @@ public class AccountCreation extends AppCompatActivity {
 
     DatabaseReference myRef;
 
-    int count;
-
     TextView welcome;
 
     boolean username_exists;
@@ -40,10 +38,8 @@ public class AccountCreation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_creation);
-
+        //connect to database
         myRef = FirebaseDatabase.getInstance().getReference("message");
-
-
 
     }//end onCreate
 
@@ -51,11 +47,13 @@ public class AccountCreation extends AppCompatActivity {
         //access preferences
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
+        //grab welcome TV and the edit texts
         welcome = (TextView) findViewById(R.id.welcome);
         username = (EditText) findViewById(R.id.et_UserName);
         password1 = (EditText) findViewById(R.id.et_Password);
         password2 = (EditText) findViewById(R.id.et_Password2);
 
+        //by default, assume no username exists since we've gotten to this page
         username_exists = false;
 
         ValueEventListener userListener = new ValueEventListener() {
@@ -64,6 +62,7 @@ public class AccountCreation extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i;
 
+                //check if username exists in database
                 for( i =1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
 
                     if(username.getText().equals(dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class))){
@@ -72,6 +71,7 @@ public class AccountCreation extends AppCompatActivity {
                     }
                 }
 
+                //if everything is in place, add the user to the database
                 if(username_exists == false && !(username.getText().toString().equals("")) &&
                         !(password1.getText().toString().equals(""))&&
                         password1.getText().toString().equals(password2.getText().toString())) {
@@ -100,8 +100,6 @@ public class AccountCreation extends AppCompatActivity {
             welcome.setText("You must enter a password");
         } else if(!password1.getText().toString().equals(password2.getText().toString())){
             welcome.setText("Passwords must match");
-            //TODO: Else if(username exists in database){
-            //welcome.setText("User exists, please choose a different name");
         } else {
             //first put the username into shared preferences
             prefs.edit().remove("username");

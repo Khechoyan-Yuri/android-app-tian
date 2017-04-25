@@ -20,6 +20,8 @@ public class Completed extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //grab the content from the XML
         setContentView(R.layout.activity_completed);
         confirmq = (TextView) findViewById(R.id.confirmq);
         tip = (EditText) findViewById(R.id.tip);
@@ -30,11 +32,11 @@ public class Completed extends AppCompatActivity {
     }
 
     public void Confirm(View v){
-        if(completionStage == 0) {
+        if(completionStage == 0) {//tips
             confirmq.setText("Okay! You offered $" + price + " for this task. You can enter a tip below:");
             tip.setVisibility(View.VISIBLE);
             completionStage++;
-        } else if(completionStage == 1) {
+        } else if(completionStage == 1) {//final confirmation
             if(tip.getText().toString().equals("")){
                 //do nothing if there is no top to add
             } else {
@@ -43,9 +45,15 @@ public class Completed extends AppCompatActivity {
 
             confirmq.setText("Your total comes to $" + price + ". A receipt will be emailed to you." +
                     " Thank you!");
+
             //TODO: remove or hide task from database
+
             //would process prices here & email receipt
+
+            //get rid of the tip EditText
             tip.setVisibility(View.GONE);
+
+            //change the button to let us go back to Main
             btn.setText("Return Home");
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override

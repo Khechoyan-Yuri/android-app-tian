@@ -85,8 +85,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView requestHeader;
-
     SharedPreferences pref;
 
     @Override
@@ -96,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Get preferences to see if a username exists
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-
         String uname = pref.getString("username", "");
 
         Log.d("uname", uname);
@@ -106,10 +103,8 @@ public class MainActivity extends AppCompatActivity {
 
             startActivity(i);
         }
-        //We start in MainActivity instead of account creation because users will usually
+        //We start in MainActivity instead of account creation because most users will usually
         //have usernames saved, so this means less swapping
-
-        CreateText();
 
         View convertView;
         LayoutInflater inflater;
@@ -120,7 +115,8 @@ public class MainActivity extends AppCompatActivity {
         //essentially search database & populate the page, doing this in a loop for every result
         //we can probably set this up like the ViewAdapter hw if we want more efficiency
         //but the priority right now is completion, not perfection
-        for(int i = 0; i < 4; i++) {//do for every task
+        for(int i = 0; i < 4; i++) {//do for every task TODO: interface with database
+
             //get task info from database here
             LinearLayout tasks = (LinearLayout) findViewById(R.id.LL_tasks);
             //for (int i = 0; i < options.length; i++) { //for each of the items in the database
@@ -140,34 +136,29 @@ public class MainActivity extends AppCompatActivity {
         }//end for loop
 
         //essentially do the same thing for the requests
-        //for(int i = 0; i < number_of_tasks; i++) {//do for every task
         //get task info from database here
         LinearLayout requests = (LinearLayout) findViewById(R.id.LL_requests);
-        //for (int i = 0; i < options.length; i++) { //for each of the items in the database
+
+        //for (int i = 0; i < options.length; i++) { //TODO: for each of the items in the database
+        //inflate the box and add it to our final result
         inflater = getLayoutInflater();
         convertView = inflater.inflate(R.layout.main_request_box, null);
         requests.addView(convertView);
 
+        //edit the content of the boxes
         //must use convertView.findViewById to fetch dynamically, or else all edits apply to one item
         txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
         txt.setText("Example changed title2");//example of changing title as we would when fetching from database
         //We would also place an onclick method here for the buttons, which would take us to appropriate details
         //and add the task to accepted tasks
         btn1 = (Button) convertView.findViewById(R.id.request_btn1text);
+
+
         //TODO: Database: if(acceptedbySomeone){
         btn1.setText("User accepted");
         //replace 'user' with username? only that risks messing with button size. Maybe just 'accepted'
         btn2 = (Button) convertView.findViewById(R.id.request_btn2text);
-        /* only necessary if we add a contact feature)
-        btn2.setText("Contact");
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //do nothing, for now. Can replace with a contact feature if we make one
-                //I doubt we will, so we might want to just remove the functionality
-            }
-        }); */
-        //in the mean time
+
 
         //} else if (TODO: completed by someone){
         btn1.setVisibility(View.GONE);
@@ -181,68 +172,63 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //}
-       // RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-       // params.addRule();
-       // btn1.setLayoutParams(params);
+
+
         RelativeLayout.LayoutParams testLP = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
         testLP.addRule(RelativeLayout.CENTER_IN_PARENT);
         testLP.addRule(RelativeLayout.BELOW, txt.getId());
 
         btn2.setLayoutParams(testLP);
-        //convertView.setGravity(Gravity.CENTER);
         // }//end for loop
 
-    }
+    }//end onCreate
 
-    public void CreateText() {
-       // Bundle bundle = getIntent().getExtras();
-
-      //  if(bundle != null) {
-      //      //requestHeader = (TextView) findViewById(R.id.request_header);
-      //      requestHeader = (TextView) findViewById(R.id.subtitle2);
-      //      requestHeader.setText(bundle.getString("taskname"+pref.getInt("requestTracker", 0)));
-      //      //requestHeader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
-      //  } TODO: Is this necessary? Commented out since it seems like just an example of change
-
-    }
-
+    //small method to take us to requests
     public void RequestForm(View v){
         Intent i = new Intent(getApplicationContext(), RequestFormCreation.class);
 
         startActivity(i);
+    }//end RequestForm
 
-    }
-
+    //small method to take us to details
     public void DetailsLook(View v) {
         Intent i = new Intent(getApplicationContext(), DetailsForm.class);
 
         startActivity(i);
-    }
+    }//end DetailsLook
 
+    //small method to take us to completion-version of details
     public void Complete(View v) {
         Intent i = new Intent(getApplicationContext(), DetailsForm.class);
         i.putExtra("completion", true);
         //TODO: set 'completed' in database
         startActivity(i);
-    }
+    }//end Complete
 
+    //function for editing requests
     public void EditRequest(View v) {
         Intent i = new Intent(getApplicationContext(), RequestFormCreation.class);
         //TODO: connect RequestFormCreation with database to get and change info
         i.putExtra("source", "edit");//basically just an extra to say we want to edit instead of make new
-        //put an extra to indicate which task needs to be edited?
+        //put an extra to indicate which task needs to be edited? or something else for database
         startActivity(i);
-    }
+    }//end EditRequest
 
+    //small method to take us to search
     public void SearchTasks(View v) {
         Intent i = new Intent(getApplicationContext(), SearchTasks.class);
 
         startActivity(i);
-    }
+    }//end searchtasks
 
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
-}
+
+    public void onBackPressed() {//deal with backbutton
+        //do nothing, since this is the main page. Prevents
+    }//end onBackPressed
+
+}//end class

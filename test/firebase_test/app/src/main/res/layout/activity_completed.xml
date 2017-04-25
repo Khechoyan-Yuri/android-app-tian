@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.yuri_khechoyan.firebase_test.Completed">
 
+    <!--Relative LAyout to hold everything-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -54,41 +55,32 @@
             android:layout_alignBottom="@+id/tv_Details"
             android:layout_toEndOf="@+id/tv_Details" />
 
-<LinearLayout
-    android:id="@+id/ll"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_below="@+id/tv_Details">
-        <TextView
-            android:id="@+id/confirmq"
-            android:textSize="24dp"
+        <!--LinearLayout to hold confirmation statement and potential tip-->
+        <LinearLayout
+            android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Task has been marked complete."
-            android:layout_marginTop="46dp" />
+            android:orientation="vertical"
+            android:layout_below="@+id/tv_Details">
 
-        <EditText
-            android:id="@+id/tip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:visibility="gone"/>
+            <TextView
+                android:id="@+id/confirmq"
+                android:textSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Task has been marked complete."
+                android:layout_marginTop="46dp" />
 
-</LinearLayout>
+            <EditText
+                android:id="@+id/tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:visibility="gone"/>
 
-        <!--may implement disagree button in the future
-        <Button
-            android:id="@+id/btn_not_completed"
-            android:layout_below="@id/box_subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Details"
-            android:textSize="10dp"
-            android:onClick="DetailsLook"/>
-            -->
+        </LinearLayout>
 
-
+        <!--Button to accept completion-->
         <Button
             android:id="@+id/btn_completed"
             android:layout_below="@id/ll"
@@ -99,17 +91,6 @@
             android:onClick="Confirm"
             android:layout_marginTop="15dp"
             android:textSize="30dp"/>
-
-        <!-- CANCEL BUTTON I don't think this should be an option, due to the potential misuse
-        <Button
-            android:id="@+id/BackButton"
-            android:onClick="GoBack"
-            android:layout_below="@id/tv_Completion"
-            android:text="Back"
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-            -->
 
 
     </RelativeLayout>
