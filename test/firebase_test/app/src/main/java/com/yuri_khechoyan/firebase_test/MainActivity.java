@@ -120,7 +120,20 @@ public class MainActivity extends AppCompatActivity {
         //we can probably set this up like the ViewAdapter hw if we want more efficiency
         //but the priority right now is completion, not perfection
 
-        for(int i = 0; i < 4; i++) {//do for every task
+        //TODO: Remove this later
+        String title = "";
+
+        if(getIntent().hasExtra("Add")) {
+            title = getIntent().getExtras().getString("Add");
+        }
+        Log.d("Add,", title);
+        int test = 4;
+        if(!title.equals("")){
+            test = 5;
+        }
+        //TODO: END REMOVE
+
+        for(int i = 0; i < test; i++) {//do for every task
                 //get task info from database here
                 LinearLayout tasks = (LinearLayout) findViewById(R.id.LL_tasks);
                 //for (int i = 0; i < options.length; i++) { //for each of the items in the database
@@ -134,6 +147,11 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText("Example Task" +i);//example of changing title as we would when fetching from database
                 //We would also place an onclick method here for the buttons, which would take us to appropriate details
                 //and add the task to accepted tasks
+
+            //TODO: Remove later
+            if(i == 4){
+                txt.setText(title);
+            }//TODO: END REMOVE
 
         }
 

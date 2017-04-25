@@ -115,6 +115,9 @@ public class SearchTasks extends AppCompatActivity {
 
                                 intent.putExtra("arraylist_count", arraylist_count);
 
+                                //tempiorary thing to show title
+                                intent.putExtra("Add", "Coffee");
+
                                 startActivity(intent);
                             }
                          });
@@ -123,6 +126,14 @@ public class SearchTasks extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 //TODO: interface with database
+
+                                //for now show basic details
+                                //go to details
+                                Intent i = new Intent(getApplicationContext(), DetailsForm.class);
+
+                                //but tell it we're on the search page, so back functionality works properly
+                                i.putExtra("source", "search");
+                                startActivity(i);
                             }
                         });
                     }//end tasks
