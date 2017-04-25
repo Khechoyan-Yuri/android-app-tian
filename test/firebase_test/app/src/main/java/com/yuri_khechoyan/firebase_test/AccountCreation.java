@@ -64,9 +64,9 @@ public class AccountCreation extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i;
 
-                for( i =1; dataSnapshot.child("User").child("username" + i).getValue(String.class) != null; i++) {
+                for( i =1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
 
-                    if(username.getText().equals(dataSnapshot.child("User").child("username" + i).getValue(String.class))){
+                    if(username.getText().equals(dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class))){
                         Toast.makeText(getApplicationContext(), "Please Choose a Different Username.", Toast.LENGTH_LONG).show();
                         username_exists = true;
                     }
@@ -76,8 +76,8 @@ public class AccountCreation extends AppCompatActivity {
                         !(password1.getText().toString().equals(""))&&
                         password1.getText().toString().equals(password2.getText().toString())) {
 
-                    myRef.child("User").child("username" + i).setValue(username.getText());
-                    myRef.child("User").child("username" + i).child("password").setValue(password1.getText());
+                    myRef.child("User").child("UserDetails" + i).child("username").setValue(username.getText().toString());
+                    myRef.child("User").child("UserDetails" + i).child("password").setValue(password1.getText().toString());
 
                 }
 
