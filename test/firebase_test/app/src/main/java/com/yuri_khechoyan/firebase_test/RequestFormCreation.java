@@ -35,6 +35,8 @@ public class RequestFormCreation extends AppCompatActivity {
 
     DatabaseReference myRef;
 
+    DatabaseReference testRef;
+
     boolean username_exists;
 
     EditText name_Username;
@@ -241,9 +243,6 @@ public class RequestFormCreation extends AppCompatActivity {
 
                 tracker = PreferenceManager.getDefaultSharedPreferences(this);
 
-                count = tracker.getInt("requestTracker", 0) + 1;
-
-                myRef.child("User").child("username" + count).setValue(Sub_UserName.getText().toString());
 
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
@@ -256,50 +255,26 @@ public class RequestFormCreation extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        for(int i =1; dataSnapshot.child("User").child("username" + i).getValue(String.class) != null; i++)
-                        if (verify_username.equals(dataSnapshot.child("User").child("username" + i).getValue(String.class)) &&
-                                dataSnapshot.child("User").child("username" + i).getValue(String.class)!= null) {
+                        int i;
+                        for( i =1; dataSnapshot.child("User").child("username" + i).getValue(String.class) != null; i++) {
+                            if (verify_username.equals(dataSnapshot.child("User").child("username" + i).getValue(String.class)) &&
+                                    dataSnapshot.child("User").child("username" + i).getValue(String.class) != null) {
 
-                                if(myRef.child("User").child("username" + count) != null) {
-                                    myRef.child("User").child("username" + count).removeValue();
-                                }
+                                Sub_UserName.setText("");
 
+                                username_exists = true;
                             }
 
-
-                        else if(dataSnapshot.child("Count").getValue(Integer.class) != null) {
-
-                            //Adding items to the bundle - output to user for SecondActivity (confirmation)
-                            bundle.putString("taskname" + count, Sub_TaskName.getText().toString());
-                            bundle.putString("tasklocation" + count, Sub_TaskLocation.getText().toString());
-                            bundle.putString("details" + count, Sub_TaskDetails.getText().toString());
-                            bundle.putString("payment" + count, Sub_TaskPayment.getText().toString());
-                            bundle.putString("username" + count, Sub_UserName.getText().toString());
-
-                            myRef.child("Count").setValue(dataSnapshot.child("Count").getValue(Integer.class) +1);
-                            count = dataSnapshot.child("Count").getValue(Integer.class) +1;
-                            myRef.child("TaskName").child("taskname" + count).setValue(Sub_TaskName.getText().toString());
-                            myRef.child("TaskLocation").child("tasklocation" + count).setValue(Sub_TaskLocation.getText().toString());
-                            myRef.child("Details").child("details" + count).setValue(Sub_TaskDetails.getText().toString());
-                            myRef.child("Payment").child("payment" + count).setValue(Sub_TaskPayment.getText().toString());
                         }
 
-                        else{
+                        if (username_exists == false) {
 
-                            //Adding items to the bundle - output to user for SecondActivity (confirmation)
-                            bundle.putString("taskname" + count, Sub_TaskName.getText().toString());
-                            bundle.putString("tasklocation" + count, Sub_TaskLocation.getText().toString());
-                            bundle.putString("details" + count, Sub_TaskDetails.getText().toString());
-                            bundle.putString("payment" + count, Sub_TaskPayment.getText().toString());
-                            bundle.putString("username" + count, Sub_UserName.getText().toString());
-
-                            myRef.child("Count").setValue(1);
-                            count =1;
+                            count = i;
+                            myRef.child("User").child("username"+count).setValue(Sub_UserName.getText().toString());
                             myRef.child("TaskName").child("taskname" + count).setValue(Sub_TaskName.getText().toString());
                             myRef.child("TaskLocation").child("tasklocation" + count).setValue(Sub_TaskLocation.getText().toString());
                             myRef.child("Details").child("details" + count).setValue(Sub_TaskDetails.getText().toString());
                             myRef.child("Payment").child("payment" + count).setValue(Sub_TaskPayment.getText().toString());
-
                         }
 
                     }
@@ -313,18 +288,24 @@ public class RequestFormCreation extends AppCompatActivity {
                 };
                 myRef.addValueEventListener(userListener);
 
-                editor.putInt("requestTracker", tracker.getInt("requestTracker", 0)+1);
-                editor.putString("TaskName"+count, verify_taskName);
-                editor.putString("TaskLocation"+count, verify_taskLocation);
-                editor.putString("Details"+count, verify_taskDetails);
-                editor.putString("Payment"+count, verify_taskPayment);
+                if(username_exists) {
+                    Toast.makeText(getApplicationContext(), "Please enter a new name", Toast.LENGTH_LONG);
+                }
 
-                editor.commit();
+                else {
+                    editor.putInt("requestTracker", tracker.getInt("requestTracker", 0)+1);
+                    editor.putString("TaskName"+tracker.getInt("requestTracker", 0)+1, verify_taskName);
+                    editor.putString("TaskLocation"+tracker.getInt("requestTracker", 0)+1, verify_taskLocation);
+                    editor.putString("Details"+tracker.getInt("requestTracker", 0)+1, verify_taskDetails);
+                    editor.putString("Payment"+tracker.getInt("requestTracker", 0)+1, verify_taskPayment);
 
-                //Securely Store items into bundle
-                intent.putExtras(bundle);
-                //Start the Activity
-                startActivity(intent);
+                    editor.commit();
+
+                    //Securely Store items into bundle
+                    intent.putExtras(bundle);
+                    //Start the Activity
+                    startActivity(intent);
+                }
             }
         }
 }
