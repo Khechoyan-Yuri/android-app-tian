@@ -31,7 +31,7 @@ public class SearchTasks extends AppCompatActivity {
 
     LinearLayout activity_search_tasks;
 
-    Button accept;
+    ArrayList<Button> accept;
 
     Button details;
 
@@ -39,12 +39,15 @@ public class SearchTasks extends AppCompatActivity {
 
     int arraylist_count;
 
+    int user_count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_tasks);
 
-        arraylist_count=-1;
+        arraylist_count=0;
+        user_count =0;
 
 
 
@@ -72,6 +75,8 @@ public class SearchTasks extends AppCompatActivity {
 
         myRef.child("Dummy").setValue("");
 
+        accept = new ArrayList<>();
+
         ValueEventListener userListener = new ValueEventListener() {
 
             @Override
@@ -85,7 +90,7 @@ public class SearchTasks extends AppCompatActivity {
 
                 //for all users
                 for (int i = 1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
-
+                    user_count++;
                     //for all tasks that the user has
                    for(int j = 1; dataSnapshot.child("User").child("UserDetails" + i).child("Tasks").child("taskname"+j).getValue(String.class) != null; j++) {
 
@@ -102,18 +107,20 @@ public class SearchTasks extends AppCompatActivity {
                         txt.setText(dataSnapshot.child("User").child("UserDetails"+i).child("Tasks").child("taskname"+j).getValue(String.class));//example of changing title as we would when fetching from database
                         //We would also place an onclick method here for the buttons, which would take us to appropriate details
                         //and add the task to accepted tasks
-                        accept = (Button) convertView.findViewById(R.id.box_task_btn2);
+                        accept.add((Button) convertView.findViewById(R.id.box_task_btn2));
 
                         details = (Button) convertView.findViewById(R.id.box_task_btn1);
 
 
                         //if accepted, accept and go to main
-                       accept.setOnClickListener(new View.OnClickListener() {
+                       accept.get(arraylist_count).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
                                 intent.putExtra("arraylist_count", arraylist_count);
+
+                                intent.putExtra("user_count", user_count);
 
                                 //tempiorary thing to show title
                                 intent.putExtra("Add", "Coffee");
