@@ -27,7 +27,6 @@ public class Completed extends AppCompatActivity {
         tip = (EditText) findViewById(R.id.tip);
         btn = (Button) findViewById(R.id.btn_completed);
 
-        //TODO: Database get price. For now I'll set a default
         price = 5.01;
     }
 
@@ -46,7 +45,6 @@ public class Completed extends AppCompatActivity {
             confirmq.setText("Your total comes to $" + price + ". A receipt will be emailed to you." +
                     " Thank you!");
 
-            //TODO: remove or hide task from database
 
             //would process prices here & email receipt
 
