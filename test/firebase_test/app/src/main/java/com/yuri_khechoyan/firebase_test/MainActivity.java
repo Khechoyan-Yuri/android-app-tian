@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         //we can probably set this up like the ViewAdapter hw if we want more efficiency
         //but the priority right now is completion, not perfection
 
-        //TODO: Remove this later
+
         String title = "";
 
         if(getIntent().hasExtra("Add")) {
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         if(!title.equals("")){
             test = 5;
         }
-        //TODO: END REMOVE
+
 
         for(int i = 0; i < test; i++) {//do for every task
                 //get task info from database here
@@ -148,10 +148,10 @@ public class MainActivity extends AppCompatActivity {
                 //We would also place an onclick method here for the buttons, which would take us to appropriate details
                 //and add the task to accepted tasks
 
-            //TODO: Remove later
+
             if(i == 4){
                 txt.setText(title);
-            }//TODO: END REMOVE
+            }
 
         }
 
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         //get task info from database here
         LinearLayout requests = (LinearLayout) findViewById(R.id.LL_requests);
 
-        //for (int i = 0; i < options.length; i++) { //TODO: for each of the items in the database
+        //for (int i = 0; i < options.length; i++) {
         //inflate the box and add it to our final result
         inflater = getLayoutInflater();
         convertView = inflater.inflate(R.layout.main_request_box, null);
@@ -175,13 +175,13 @@ public class MainActivity extends AppCompatActivity {
         btn1 = (Button) convertView.findViewById(R.id.request_btn1text);
 
 
-        //TODO: Database: if(acceptedbySomeone){
+        //Database: if(acceptedbySomeone){
         btn1.setText("User accepted");
         //replace 'user' with username? only that risks messing with button size. Maybe just 'accepted'
         btn2 = (Button) convertView.findViewById(R.id.request_btn2text);
 
 
-        //} else if (TODO: completed by someone){
+        //} else if (completed by someone){
         btn1.setVisibility(View.GONE);
         btn2.setText("Completed");
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -223,14 +223,14 @@ public class MainActivity extends AppCompatActivity {
     public void Complete(View v) {
         Intent i = new Intent(getApplicationContext(), DetailsForm.class);
         i.putExtra("completion", true);
-        //TODO: set 'completed' in database
+        //set 'completed' in database
         startActivity(i);
     }//end Complete
 
     //function for editing requests
     public void EditRequest(View v) {
         Intent i = new Intent(getApplicationContext(), RequestFormCreation.class);
-        //TODO: connect RequestFormCreation with database to get and change info
+        //connect RequestFormCreation with database to get and change info
         i.putExtra("source", "edit");//basically just an extra to say we want to edit instead of make new
         //put an extra to indicate which task needs to be edited? or something else for database
         startActivity(i);

@@ -63,7 +63,7 @@ public class SearchTasks extends AppCompatActivity {
         accept.get(0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: in Database, set 'accepted', set Dundee to the current user
+                //in Database, set 'accepted', set Dundee to the current user
             }
         });*/
 
@@ -125,7 +125,7 @@ public class SearchTasks extends AppCompatActivity {
                         details.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                //TODO: interface with database
+                                //interface with database
 
                                 //for now show basic details
                                 //go to details

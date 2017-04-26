@@ -23,8 +23,6 @@ public class DetailsForm extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        //TODO: get info from database.
-
         if(intent.hasExtra("username"+0)) {
             taskname.setText(intent.getStringExtra("username"+0));
         }
