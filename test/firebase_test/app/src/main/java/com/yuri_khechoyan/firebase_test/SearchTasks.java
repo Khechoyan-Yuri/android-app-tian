@@ -31,7 +31,7 @@ public class SearchTasks extends AppCompatActivity {
 
     LinearLayout activity_search_tasks;
 
-    ArrayList<Button> accept;
+    Button accept;
 
     Button details;
 
@@ -75,8 +75,6 @@ public class SearchTasks extends AppCompatActivity {
 
         myRef.child("Dummy").setValue("");
 
-        accept = new ArrayList<>();
-
         ValueEventListener userListener = new ValueEventListener() {
 
             @Override
@@ -90,13 +88,13 @@ public class SearchTasks extends AppCompatActivity {
 
                 //for all users
                 for (int i = 1; dataSnapshot.child("User").child("UserDetails" + i).child("username").getValue(String.class) != null; i++) {
-                    user_count++;
+                    user_count =i;
                     //for all tasks that the user has
                    for(int j = 1; dataSnapshot.child("User").child("UserDetails" + i).child("Tasks").child("taskname"+j).getValue(String.class) != null; j++) {
 
                         //Log.d("USER_DETAILS", dataSnapshot.child("User").child("UserDetails" + i).child("Tasks").child("taskname"+j).getValue(String.class));
 
-                       arraylist_count++;
+                        arraylist_count = j;
 
                         //inflate the box
                         convertView = inflater.inflate(R.layout.box, null);
@@ -107,29 +105,28 @@ public class SearchTasks extends AppCompatActivity {
                         txt.setText(dataSnapshot.child("User").child("UserDetails"+i).child("Tasks").child("taskname"+j).getValue(String.class));//example of changing title as we would when fetching from database
                         //We would also place an onclick method here for the buttons, which would take us to appropriate details
                         //and add the task to accepted tasks
-                        accept.add((Button) convertView.findViewById(R.id.box_task_btn2));
+                        accept = (Button) convertView.findViewById(R.id.box_task_btn2);
 
                         details = (Button) convertView.findViewById(R.id.box_task_btn1);
 
+                       accept.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View v) {
+                               Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
-                        //if accepted, accept and go to main
-                       accept.get(arraylist_count).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                               intent.putExtra("arraylist_count",arraylist_count);
 
-                                intent.putExtra("arraylist_count", arraylist_count);
+                               intent.putExtra("user_count", user_count);
 
-                                intent.putExtra("user_count", user_count);
+                               //temporary thing to show title
+                               intent.putExtra("Add", "Coffee");
 
-                                //tempiorary thing to show title
-                                intent.putExtra("Add", "Coffee");
+                               startActivity(intent);
+                           }
+                       });
 
-                                startActivity(intent);
-                            }
-                         });
 
-                        details.setOnClickListener(new View.OnClickListener() {
+                       details.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 //interface with database
@@ -144,9 +141,12 @@ public class SearchTasks extends AppCompatActivity {
                             }
                         });
                     }//end tasks
-                }//end users
 
-            }//end onDataChange
+
+                }
+
+
+            }//end users
 
             @Override
             public void onCancelled (DatabaseError databaseError){
@@ -158,6 +158,11 @@ public class SearchTasks extends AppCompatActivity {
         }; //end event listener
 
         myRef.addValueEventListener(userListener);
+
+                                //if accepted, accept and go to main
+        // end onDataChange
+
+
     }//end onCreate
 
     //default details onClick

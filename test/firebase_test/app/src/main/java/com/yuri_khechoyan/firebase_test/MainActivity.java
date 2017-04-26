@@ -166,47 +166,50 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(title);
             }
 
-            if(intent.getIntExtra("arraylist_count", 0) !=0){
-
-                myRef.child("Dummy").setValue("");
-
-                ValueEventListener userListener = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        //get task info from database here
-                        tasks = (LinearLayout) findViewById(R.id.LL_tasks);
-                        //for (int i = 0; i < options.length; i++) { //for each of the items in the database
-                        inflater = getLayoutInflater();
-                        convertView = inflater.inflate(R.layout.main_task_box, null);
-                        tasks.addView(convertView);
-
-                        //must use convertView.findViewById to fetch dynamically, or else all edits apply to one item
-                        txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
-                        //txt.setId(55+1);//for some reason doesn't accept singular numbers?
-                        txt.setText(dataSnapshot.child("User").child("UserDetails"+intent.getIntExtra("user_count", 0)).child("Tasks").child("taskname"+intent.getIntExtra("arraylist_count", 0)).getValue(String.class));//example of changing title as we would when fetching from database
-                        //We would also place an onclick method here for the buttons, which would take us to appropriate details
-                        //and add the task to accepted tasks
-
-                        Log.d("USER_COUNT", Integer.toString(intent.getIntExtra("user_count", 0)));
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        // Getting Post failed, log a message
-                        Log.w("Canceled", "loadPost:onCancelled", databaseError.toException());
-                        // ...
-                    }
-
-                };
-
-                myRef.addListenerForSingleValueEvent(userListener);
+        }
 
 
-            }
+        if(intent.getIntExtra("arraylist_count", 0) !=0) {
+
+            myRef.child("Dummy").setValue("");
+
+            ValueEventListener userListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //get task info from database here
+                    tasks = (LinearLayout) findViewById(R.id.LL_tasks);
+                    //for (int i = 0; i < options.length; i++) { //for each of the items in the database
+                    inflater = getLayoutInflater();
+                    convertView = inflater.inflate(R.layout.main_task_box, null);
+                    tasks.addView(convertView);
+
+                    //must use convertView.findViewById to fetch dynamically, or else all edits apply to one item
+                    txt = (TextView) convertView.findViewById(R.id.box_subtitle1);
+                    //txt.setId(55+1);//for some reason doesn't accept singular numbers?
+                    txt.setText(dataSnapshot.child("User").child("UserDetails" + intent.getIntExtra("user_count", 0)).child("Tasks").child("taskname" + intent.getIntExtra("arraylist_count", 0)).getValue(String.class));//example of changing title as we would when fetching from database
+                    //We would also place an onclick method here for the buttons, which would take us to appropriate details
+                    //and add the task to accepted tasks
+
+                    Log.d("USER_COUNT", Integer.toString(intent.getIntExtra("user_count", 0)));
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("Canceled", "loadPost:onCancelled", databaseError.toException());
+                    // ...
+                }
+
+            };
+
+            myRef.addListenerForSingleValueEvent(userListener);
+
+        }
 
 
-        //essentially do the same thing for the requests
+
+            //essentially do the same thing for the requests
         //get task info from database here
         LinearLayout requests = (LinearLayout) findViewById(R.id.LL_requests);
 
@@ -242,7 +245,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        //}
 
 
         RelativeLayout.LayoutParams testLP = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
