@@ -134,6 +134,12 @@ public class MainActivity extends AppCompatActivity {
         //TODO: END REMOVE
 
         for(int i = 0; i < test; i++) {//do for every task
+
+                if(intent.getIntExtra("arraylist_count", 0) !=0){
+
+
+                }
+
                 //get task info from database here
                 LinearLayout tasks = (LinearLayout) findViewById(R.id.LL_tasks);
                 //for (int i = 0; i < options.length; i++) { //for each of the items in the database
