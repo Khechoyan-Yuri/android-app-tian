@@ -56,7 +56,7 @@ public class SearchTasks extends AppCompatActivity {
         //but the priority right now is completion, not perfection
         activity_search_tasks = (LinearLayout) findViewById(R.id.RL_activity_search_tasks);
         //for (int i = 0; i < options.length; i++) { //for each of the items in the database
-        inflater = getLayoutInflater();
+
 
        /* TextView txt = (TextView) convertView.get(0).findViewById(R.id.box_subtitle1);
         txt.setText("Example changed title");//example of changing title as we would when fetching from database
@@ -94,6 +94,8 @@ public class SearchTasks extends AppCompatActivity {
 
                         //Log.d("USER_DETAILS", dataSnapshot.child("User").child("UserDetails" + i).child("Tasks").child("taskname"+j).getValue(String.class));
 
+                       inflater = getLayoutInflater();
+
                         arraylist_count = j;
 
                         //inflate the box
@@ -117,9 +119,6 @@ public class SearchTasks extends AppCompatActivity {
                                intent.putExtra("arraylist_count",arraylist_count);
 
                                intent.putExtra("user_count", user_count);
-
-                               //temporary thing to show title
-                               intent.putExtra("Add", "Coffee");
 
                                startActivity(intent);
                            }
